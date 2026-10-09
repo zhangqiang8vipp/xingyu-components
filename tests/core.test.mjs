@@ -17,13 +17,15 @@ test("example composes text, grid, metric and callout", () => {
   if (result.ok) assert.equal(result.document.blocks.length, 3);
 });
 
-test("schema catalog is the only source for all seven primitive types", () => {
+test("schema catalog is the only source for all forty registered component types", () => {
   const names = builtInDefinitions.map((entry) => entry.type);
   assert.deepEqual(names, ["text", "callout", "metric", "stack", "grid", "disclosure", "divider",
     "heading", "quote", "badge", "bullet_list", "numbered_list", "key_value", "table",
     "progress", "timeline", "steps", "comparison", "bar_chart",
     "accordion", "checklist", "status_list", "code_block", "sources", "line_chart",
-    "pie_chart", "flowchart", "pros_cons", "glossary", "tag_list"]);
+    "pie_chart", "flowchart", "pros_cons", "glossary", "tag_list",
+    "panel", "hero", "link_cards", "tree_view", "stacked_bar_chart",
+    "scatter_chart", "heatmap", "rating_group", "agenda", "kanban_board"]);
   assert.equal(new Set(names).size, names.length);
   const manifest = createCapabilityManifest();
   assert.equal(manifest.protocol, "xingyu-document");
