@@ -38,9 +38,9 @@ const valid = [
 ];
 
 test("all twelve new primitives are discoverable and schema-checked", () => {
-  assert.equal(builtInDefinitions.length, 30);
+  assert.equal(builtInDefinitions.length, 40);
   const list = createCapabilityManifest().components;
-  assert.equal(new Set(list.map(({ type }) => type)).size, 30);
+  assert.equal(new Set(list.map(({ type }) => type)).size, 40);
   for (const block of valid) {
     const match = list.find(({ type }) => type === block.type);
     assert.ok(match, block.type + " must be described in agent manifest");
