@@ -1,0 +1,70 @@
+/* Scoped, token-driven styles. Does not change the host page's body or global theme. */
+.xyc-document {
+  --xyc-ink: var(--ink, #1d1d1f);
+  --xyc-muted: var(--muted, #6e6e73);
+  --xyc-line: var(--line, rgba(0, 0, 0, .12));
+  --xyc-accent: var(--blue, #2563eb);
+  --xyc-surface: var(--surface, #fff);
+  --xyc-soft: var(--soft, #f5f5f7);
+  color: var(--xyc-ink);
+  min-width: 0;
+}
+.xyc-document .xyc-text { margin: 0 0 1em; line-height: 1.75; overflow-wrap: anywhere; }
+.xyc-document .xyc-stack { display: flex; flex-direction: column; min-width: 0; }
+.xyc-document .xyc-gap-sm { gap: 8px; }
+.xyc-document .xyc-gap-md { gap: 16px; }
+.xyc-document .xyc-gap-lg { gap: 24px; }
+.xyc-document .xyc-grid { display: grid; gap: 12px; min-width: 0; }
+.xyc-document .xyc-columns-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.xyc-document .xyc-columns-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.xyc-document .xyc-callout {
+  padding: 16px 18px;
+  border: 1px solid var(--xyc-line);
+  border-left: 3px solid var(--xyc-accent);
+  border-radius: 10px;
+  background: var(--xyc-soft);
+  min-width: 0;
+}
+.xyc-document .xyc-callout-title { display: block; font-weight: 650; }
+.xyc-document .xyc-callout p { margin: 8px 0 0; line-height: 1.6; overflow-wrap: anywhere; }
+.xyc-document .xyc-tone-success { border-left-color: #14834b; }
+.xyc-document .xyc-tone-warning { border-left-color: #c27c10; }
+.xyc-document .xyc-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px;
+  border: 1px solid var(--xyc-line);
+  border-radius: 10px;
+  background: var(--xyc-surface);
+  min-width: 0;
+}
+.xyc-document .xyc-metric-label,
+.xyc-document .xyc-metric small { color: var(--xyc-muted); font-size: .86em; overflow-wrap: anywhere; }
+.xyc-document .xyc-metric-value { font-size: clamp(1.2rem, 2.5vw, 1.8rem); overflow-wrap: anywhere; }
+.xyc-document .xyc-disclosure {
+  padding: 12px 16px;
+  border: 1px solid var(--xyc-line);
+  border-radius: 10px;
+  background: var(--xyc-surface);
+}
+.xyc-document .xyc-disclosure summary { cursor: pointer; font-weight: 600; }
+.xyc-document .xyc-disclosure summary:focus-visible { outline: 2px solid var(--xyc-accent); outline-offset: 3px; }
+.xyc-document .xyc-disclosure p { margin: 12px 0 0; line-height: 1.6; overflow-wrap: anywhere; }
+.xyc-document .xyc-divider { border: 0; border-top: 1px solid var(--xyc-line); margin: 12px 0; }
+.xyc-document.xyc-fallback,
+.xyc-document .xyc-unavailable {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  border: 1px solid var(--xyc-line);
+  border-radius: 10px;
+  padding: 12px;
+  background: var(--xyc-soft);
+  font: inherit;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .875em;
+}
+@media (max-width: 640px) {
+  .xyc-document .xyc-grid { grid-template-columns: minmax(0, 1fr); }
+}
