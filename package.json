@@ -31,7 +31,9 @@
     "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc -p tsconfig.build.json --noEmit",
     "test": "node --test tests/*.test.mjs",
-    "ci": "npm run typecheck && npm run build && npm test"
+    "ci": "npm run typecheck && npm run gallery:build && npm test",
+    "gallery:build": "npm run build && node gallery/build.mjs",
+    "gallery:preview": "node gallery/serve.mjs"
   },
   "peerDependencies": {
     "react": ">=18.2 <20"
