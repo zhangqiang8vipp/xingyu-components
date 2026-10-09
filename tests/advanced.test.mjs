@@ -67,7 +67,7 @@ test("all 30 registered types are discoverable and all 11 new examples use exact
 test("all eleven primitives SSR-render from the actual production map", () => {
   const result = html(valid);
   assert.match(result, /<details/);
-  assert.match(result, /<summary>Why\?</summary>/);
+  assert.ok(result.includes("<summary>Why?</summary>"));
   assert.match(result, /<pre><code>/);
   assert.match(result, /<svg/);
   assert.match(result, /xyc-advanced-pie/);

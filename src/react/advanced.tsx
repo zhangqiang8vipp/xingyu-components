@@ -53,7 +53,7 @@ function LineChart({ title, items, unit }: {
       <div className="xyc-advanced-chart-scroll" role="region" tabIndex={0} aria-label="横向滚动查看折线图">
         <svg viewBox={`0 0 ${w} ${h}`} role="img"
           aria-label={`${title}，${chartNames.line_chart}，共 ${items.length} 个数据点`}>
-          <title>{title} · 折线图</title>
+          <title>{`${title} · 折线图`}</title>
           {[0, 0.25, 0.5, 0.75, 1].map((fraction) => {
             const y = top + plotHeight * (1 - fraction);
             return (
@@ -111,7 +111,7 @@ function PieChart({ title, items, unit }: {
       <figcaption>{title}</figcaption>
       <svg className="xyc-advanced-pie" viewBox="0 0 680 274" role="img"
         aria-label={`${title}，${chartNames.pie_chart}，共 ${items.length} 个分类`}>
-        <title>{title} · 饼图</title>
+        <title>{`${title} · 饼图`}</title>
         {segments}
       </svg>
       <ul className="xyc-advanced-legend" aria-label="图表分类与原始值">
