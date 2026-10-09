@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "blocks": [
+    {
+      "type": "text",
+      "version": 1,
+      "props": {
+        "text": "AI chooses the format; the site remains in charge of safe display."
+      }
+    },
+    {
+      "type": "grid",
+      "version": 1,
+      "props": {
+        "columns": 2
+      },
+      "children": [
+        {
+          "type": "metric",
+          "version": 1,
+          "props": {
+            "label": "Implemented base primitives",
+            "value": "7",
+            "note": "An illustrative count, not product usage analytics"
+          }
+        },
+        {
+          "type": "callout",
+          "version": 1,
+          "props": {
+            "title": "Safe by design",
+            "body": "Source text is never executed, and unknown blocks are preserved for fallback.",
+            "tone": "info"
+          }
+        }
+      ]
+    },
+    {
+      "type": "disclosure",
+      "version": 1,
+      "props": {
+        "summary": "Why an independent library?",
+        "body": "The blog keeps its own storage, permissions and article design. This package owns only safe document presentation."
+      }
+    }
+  ]
+}
