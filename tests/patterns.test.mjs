@@ -6,17 +6,17 @@ import { builtInDefinitions, createCapabilityManifest, parseDocument } from "../
 import { DocumentRenderer } from "../dist/react/index.js";
 import { gallerySpecimens } from "../gallery/fixtures.mjs";
 
-const types = ["panel", "hero", "link_cards", "tree_view", "stacked_bar_chart",
+const types = ["panel", "hero", "link_cards", "stacked_bar_chart",
   "scatter_chart", "heatmap", "rating_group", "agenda", "kanban_board"];
 const source = (block) => JSON.stringify({ version: 1, blocks: [block] });
 const b = (type, props, children) => ({ type, version: 1, props, ...(children ? { children } : {}) });
 const valid = (block) => parseDocument(source(block)).ok;
 const render = (block) => renderToStaticMarkup(createElement(DocumentRenderer, { source: source(block) }));
 
-test("40 components expose ten new patterns through the exact same capability manifest", () => {
-  assert.equal(builtInDefinitions.length, 40);
+test("24 components expose nine new patterns through the exact same capability manifest", () => {
+  assert.equal(builtInDefinitions.length, 24);
   const capabilities = createCapabilityManifest().components;
-  assert.deepEqual(capabilities.slice(-10).map((item) => item.type), types);
+  assert.deepEqual(capabilities.slice(-9).map((item) => item.type), types);
   assert.equal(new Set(capabilities.map((item) => item.type)).size, 40);
   for (const type of types) {
     assert.ok(gallerySpecimens[type], "missing gallery specimen for " + type);

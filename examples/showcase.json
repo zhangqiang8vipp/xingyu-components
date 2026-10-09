@@ -2,6 +2,40 @@
   "version": 1,
   "blocks": [
     {
+      "type": "stack",
+      "version": 1,
+      "props": {
+        "gap": "sm"
+      },
+      "children": [
+        {
+          "type": "badge",
+          "version": 1,
+          "props": {
+            "label": "24 个独立组件",
+            "tone": "info"
+          }
+        },
+        {
+          "type": "metric",
+          "version": 1,
+          "props": {
+            "label": "可视化能力",
+            "value": "24"
+          }
+        }
+      ]
+    },
+    {
+      "type": "callout",
+      "version": 1,
+      "props": {
+        "title": "Markdown 优先",
+        "body": "本文只演示 Markdown 无法原生表达的可视组件。",
+        "tone": "info"
+      }
+    },
+    {
       "type": "grid",
       "version": 1,
       "props": {
