@@ -18,11 +18,6 @@ const object = (properties: Record<string, ValueSchema>, required: string[]): Ob
  */
 export const builtInDefinitions: readonly ComponentDefinition[] = [
   {
-    type: "text", version: 1, label: "纯文本", category: "content",
-    description: "Display a short plain-text paragraph; Markdown remains the primary format for long articles.",
-    propsSchema: object({ text: string(4000) }, ["text"]), children: "none",
-  },
-  {
     type: "callout", version: 1, label: "提示卡片", category: "content",
     description: "A contextual tip, note, or warning. No HTML or executable content.",
     propsSchema: object({
@@ -46,17 +41,6 @@ export const builtInDefinitions: readonly ComponentDefinition[] = [
     description: "Compose child blocks into two or three responsive columns.",
     propsSchema: object({ columns: { type: "integer", minimum: 2, maximum: 3 } }, ["columns"]),
     children: "required",
-  },
-  {
-    type: "disclosure", version: 1, label: "折叠内容", category: "interaction",
-    description: "A local native details/summary interaction, with no network or write effects.",
-    propsSchema: object({ summary: string(160), body: string(2000) }, ["summary", "body"]),
-    children: "none",
-  },
-  {
-    type: "divider", version: 1, label: "分隔线", category: "layout",
-    description: "A subtle thematic visual separator.",
-    propsSchema: object({}, []), children: "none",
   },
   ...extendedDefinitions,
   ...advancedDefinitions,

@@ -2,21 +2,6 @@
   "version": 1,
   "blocks": [
     {
-      "type": "heading",
-      "version": 1,
-      "props": {
-        "text": "XINGYU Components · 通用内容示例",
-        "level": 2
-      }
-    },
-    {
-      "type": "text",
-      "version": 1,
-      "props": {
-        "text": "以下均为演示数据，只展示组件组合方式；正常文章依然可以使用 Markdown。"
-      }
-    },
-    {
       "type": "grid",
       "version": 1,
       "props": {
@@ -52,81 +37,6 @@
       ]
     },
     {
-      "type": "quote",
-      "version": 1,
-      "props": {
-        "text": "好的展示方式应该让内容更容易理解，而不是制造视觉噪音。",
-        "attribution": "示例引文"
-      }
-    },
-    {
-      "type": "bullet_list",
-      "version": 1,
-      "props": {
-        "items": [
-          "文字优先",
-          "数据需要依据",
-          "组件仅负责展示"
-        ]
-      }
-    },
-    {
-      "type": "numbered_list",
-      "version": 1,
-      "props": {
-        "items": [
-          "选择组件",
-          "填写数据",
-          "安全渲染"
-        ]
-      }
-    },
-    {
-      "type": "key_value",
-      "version": 1,
-      "props": {
-        "title": "文档属性（演示）",
-        "items": [
-          {
-            "label": "协议",
-            "value": "xingyu-document v1"
-          },
-          {
-            "label": "呈现",
-            "value": "React SSR"
-          }
-        ]
-      }
-    },
-    {
-      "type": "table",
-      "version": 1,
-      "props": {
-        "title": "示例表格",
-        "columns": [
-          "分类",
-          "示例值",
-          "备注"
-        ],
-        "rows": [
-          {
-            "cells": [
-              "排版",
-              "8",
-              "示意"
-            ]
-          },
-          {
-            "cells": [
-              "数据",
-              "5",
-              "示意"
-            ]
-          }
-        ]
-      }
-    },
-    {
       "type": "timeline",
       "version": 1,
       "props": {
@@ -140,45 +50,6 @@
             "label": "阶段 B",
             "title": "建立展示模块",
             "detail": "保留原始数据"
-          }
-        ]
-      }
-    },
-    {
-      "type": "steps",
-      "version": 1,
-      "props": {
-        "title": "示例步骤",
-        "items": [
-          {
-            "title": "运行检查",
-            "body": "在本地项目根目录执行测试",
-            "code": "npm run ci"
-          },
-          {
-            "title": "人工查看",
-            "body": "检查移动端和键盘操作"
-          }
-        ]
-      }
-    },
-    {
-      "type": "comparison",
-      "version": 1,
-      "props": {
-        "title": "布局方式示例",
-        "left": "纵向",
-        "right": "网格",
-        "rows": [
-          {
-            "dimension": "适合内容",
-            "left": "文章段落",
-            "right": "短指标"
-          },
-          {
-            "dimension": "移动端",
-            "left": "自然流动",
-            "right": "自动换行"
           }
         ]
       }
@@ -206,19 +77,6 @@
       }
     },
     {
-      "type": "divider",
-      "version": 1,
-      "props": {}
-    },
-    {
-      "type": "disclosure",
-      "version": 1,
-      "props": {
-        "summary": "这些数据真实吗？",
-        "body": "不是，都是示例。组件不会联网查询或验证演示数字。"
-      }
-    },
-    {
       "type": "accordion",
       "version": 1,
       "props": {
@@ -227,24 +85,6 @@
           {
             "question": "所有内容都需要组件吗？",
             "answer": "不需要。普通文章继续使用 Markdown。"
-          }
-        ]
-      }
-    },
-    {
-      "type": "checklist",
-      "version": 1,
-      "props": {
-        "title": "静态核对 · 演示",
-        "items": [
-          {
-            "text": "确认数据来源",
-            "checked": true
-          },
-          {
-            "text": "浏览器视觉复核",
-            "checked": false,
-            "note": "需要真实人工检查"
           }
         ]
       }
@@ -262,29 +102,6 @@
           {
             "text": "检查布局",
             "status": "active"
-          }
-        ]
-      }
-    },
-    {
-      "type": "code_block",
-      "version": 1,
-      "props": {
-        "language": "typescript",
-        "code": "const format = \"xingyu-document/v1\";\nconsole.log(format);",
-        "caption": "示例文本，不自动运行"
-      }
-    },
-    {
-      "type": "sources",
-      "version": 1,
-      "props": {
-        "title": "资料入口 · 演示",
-        "items": [
-          {
-            "label": "MDN HTML details",
-            "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details",
-            "note": "参考链接仅由作者提供"
           }
         ]
       }
@@ -333,25 +150,6 @@
       }
     },
     {
-      "type": "flowchart",
-      "version": 1,
-      "props": {
-        "title": "三阶段流程 · 演示",
-        "items": [
-          {
-            "title": "准备"
-          },
-          {
-            "title": "验证"
-          },
-          {
-            "title": "发布",
-            "detail": "仅在确认后进行"
-          }
-        ]
-      }
-    },
-    {
       "type": "pros_cons",
       "version": 1,
       "props": {
@@ -387,6 +185,179 @@
           "组件",
           "结构化",
           "阅读"
+        ]
+      }
+    },
+    {
+      "type": "panel",
+      "version": 1,
+      "props": {
+        "title": "组件组合",
+        "summary": "示例数据，不替代 Markdown。",
+        "tone": "soft"
+      },
+      "children": [
+        {
+          "type": "metric",
+          "version": 1,
+          "props": {
+            "label": "示例",
+            "value": "24"
+          }
+        },
+        {
+          "type": "badge",
+          "version": 1,
+          "props": {
+            "label": "仅独立组件",
+            "tone": "info"
+          }
+        }
+      ]
+    },
+    {
+      "type": "hero",
+      "version": 1,
+      "props": {
+        "eyebrow": "EXAMPLE",
+        "title": "为内容选对视觉形式",
+        "summary": "普通标题和正文仍使用宿主 Markdown。"
+      }
+    },
+    {
+      "type": "link_cards",
+      "version": 1,
+      "props": {
+        "items": [
+          {
+            "label": "MDN",
+            "url": "https://developer.mozilla.org/",
+            "note": "仅为演示链接"
+          }
+        ]
+      }
+    },
+    {
+      "type": "stacked_bar_chart",
+      "version": 1,
+      "props": {
+        "title": "模拟类别",
+        "items": [
+          {
+            "label": "A",
+            "value": 40
+          },
+          {
+            "label": "B",
+            "value": 60
+          }
+        ]
+      }
+    },
+    {
+      "type": "scatter_chart",
+      "version": 1,
+      "props": {
+        "title": "模拟坐标",
+        "xLabel": "横轴",
+        "yLabel": "纵轴",
+        "items": [
+          {
+            "label": "A",
+            "x": 2,
+            "y": 3
+          },
+          {
+            "label": "B",
+            "x": 4,
+            "y": 6
+          }
+        ]
+      }
+    },
+    {
+      "type": "heatmap",
+      "version": 1,
+      "props": {
+        "title": "示例矩阵",
+        "columns": [
+          "A",
+          "B"
+        ],
+        "rows": [
+          {
+            "label": "甲",
+            "values": [
+              10,
+              50
+            ]
+          },
+          {
+            "label": "乙",
+            "values": [
+              70,
+              90
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "type": "rating_group",
+      "version": 1,
+      "props": {
+        "title": "模拟评分",
+        "items": [
+          {
+            "label": "维度一",
+            "score": 4.5
+          },
+          {
+            "label": "维度二",
+            "score": 3
+          }
+        ]
+      }
+    },
+    {
+      "type": "agenda",
+      "version": 1,
+      "props": {
+        "title": "演示安排",
+        "items": [
+          {
+            "when": "09:00",
+            "title": "介绍"
+          },
+          {
+            "when": "10:00",
+            "title": "讨论"
+          }
+        ]
+      }
+    },
+    {
+      "type": "kanban_board",
+      "version": 1,
+      "props": {
+        "title": "示例看板",
+        "columns": [
+          {
+            "title": "待开始",
+            "cards": [
+              {
+                "title": "审阅"
+              }
+            ]
+          },
+          {
+            "title": "已完成",
+            "cards": [
+              {
+                "title": "构建"
+              }
+            ]
+          }
         ]
       }
     }

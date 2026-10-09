@@ -49,14 +49,6 @@ export const patternRenderers: RendererMap = {
       <p className="xyc-pattern-note">外部资源由作者提供，点击后才访问；内容未自动核验。</p>
     </section>
   ),
-  tree_view: (props) => (
-    <section className="xyc-pattern-tree" aria-label={title(props.title) || "层级结构"}>
-      {typeof props.title === "string" && <h3>{props.title}</h3>}
-      <ul>{(props.groups as { label: string; children: string[] }[]).map((group, i) =>
-        <li key={i}><strong>{group.label}</strong><ul>{group.children.map((leaf, j) =>
-          <li key={j}>{leaf}</li>)}</ul></li>)}</ul>
-    </section>
-  ),
   stacked_bar_chart: (props) => {
     const items = props.items as Value[];
     const total = items.reduce((sum, v) => sum + v.value, 0);

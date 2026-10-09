@@ -59,17 +59,6 @@ export const patternDefinitions: readonly ComponentDefinition[] = [
     children: "none",
   },
   {
-    type: "tree_view", version: 1, label: "层级结构树", category: "data",
-    description: "Two-level information hierarchy with limited groups and leaves, without expanding remote data.",
-    propsSchema: obj({
-      title: heading,
-      groups: array(obj({
-        label: str(120), children: array(str(180), 1, 8),
-      }, ["label", "children"]), 1, 8),
-    }, ["groups"]),
-    children: "none",
-  },
-  {
     type: "stacked_bar_chart", version: 1, label: "分段比例条", category: "data",
     description: "Static SVG stacked share bar with a positive total and an accessible raw values table.",
     propsSchema: obj({

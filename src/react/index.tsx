@@ -10,7 +10,6 @@ export type BlockRenderer = (props: Readonly<Record<string, unknown>>, children:
 export type RendererMap = Readonly<Record<string, BlockRenderer>>;
 
 export const builtInRenderers: RendererMap = {
-  text: (props) => createElement("p", { className: "xyc-text" }, String(props.text)),
   callout: (props) => createElement("aside", {
     className: "xyc-callout xyc-tone-" + String(props.tone),
     role: props.tone === "warning" ? "note" : undefined,
@@ -29,11 +28,6 @@ export const builtInRenderers: RendererMap = {
   grid: (props, children) => createElement("div", {
     className: "xyc-grid xyc-columns-" + String(props.columns),
   }, ...children),
-  disclosure: (props) => createElement("details", { className: "xyc-disclosure" },
-    createElement("summary", null, String(props.summary)),
-    createElement("p", null, String(props.body)),
-  ),
-  divider: () => createElement("hr", { className: "xyc-divider", "aria-hidden": true }),
   ...extendedRenderers,
   ...advancedRenderers,
   ...patternRenderers,

@@ -36,17 +36,6 @@ export const advancedDefinitions: readonly ComponentDefinition[] = [
     children: "none",
   },
   {
-    type: "checklist", version: 1, label: "只读检查清单", category: "data",
-    description: "Author-provided checked or unchecked states; not editable and never persisted from the UI.",
-    propsSchema: obj({
-      title,
-      items: array(obj({
-        text: str(200), checked: { type: "boolean" }, note: str(340),
-      }, ["text", "checked"]), 1, 30),
-    }, ["items"]),
-    children: "none",
-  },
-  {
     type: "status_list", version: 1, label: "状态清单", category: "data",
     description: "Author-confirmed done, active, pending, blocked states with optional explanatory details.",
     propsSchema: obj({
@@ -54,25 +43,6 @@ export const advancedDefinitions: readonly ComponentDefinition[] = [
       items: array(obj({
         text: str(180), status: pick("done", "active", "pending", "blocked"), detail: str(400),
       }, ["text", "status"]), 1, 24),
-    }, ["items"]),
-    children: "none",
-  },
-  {
-    type: "code_block", version: 1, label: "代码示例", category: "content",
-    description: "Escaped, non-executing code with a plain language label; no syntax engine or remote dependencies.",
-    propsSchema: obj({
-      language: str(32), code: str(8000), caption: str(160),
-    }, ["language", "code"]),
-    children: "none",
-  },
-  {
-    type: "sources", version: 1, label: "来源引用", category: "content",
-    description: "Author-provided HTTPS references only; links are never fetched or automatically verified.",
-    propsSchema: obj({
-      title,
-      items: array(obj({
-        label: str(180), url: { type: "https-url", maxLength: 600 }, note: str(360),
-      }, ["label", "url"]), 1, 12),
     }, ["items"]),
     children: "none",
   },
@@ -90,15 +60,6 @@ export const advancedDefinitions: readonly ComponentDefinition[] = [
     propsSchema: obj({
       title, unit: str(28), items: array(chartDatum, 2, 8, "value"),
     }, ["title", "items"]),
-    children: "none",
-  },
-  {
-    type: "flowchart", version: 1, label: "流程路径", category: "data",
-    description: "A simple ordered flow with explicit titles and optional notes; no invented decisions or executable actions.",
-    propsSchema: obj({
-      title,
-      items: array(obj({ title: str(150), detail: str(500) }, ["title"]), 2, 10),
-    }, ["items"]),
     children: "none",
   },
   {
