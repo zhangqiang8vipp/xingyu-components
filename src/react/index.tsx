@@ -1,3 +1,4 @@
+import { extendedRenderers } from "./extended.js";
 import { createElement, Fragment } from "react";
 import type { ReactNode } from "react";
 import { defaultRegistry, parseDocument } from "../core/index.js";
@@ -31,6 +32,7 @@ export const builtInRenderers: RendererMap = {
     createElement("p", null, String(props.body)),
   ),
   divider: () => createElement("hr", { className: "xyc-divider", "aria-hidden": true }),
+  ...extendedRenderers,
 };
 
 export interface DocumentRendererProps {
@@ -45,8 +47,8 @@ export interface DocumentRendererProps {
 
 function renderBlock(block: DocumentBlock, renderers: RendererMap, path: string): ReactNode {
   const children = block.children?.map((child, i) => renderBlock(child, renderers, path + "-" + i)) ?? [];
-  const renderer = renderers[block.type];
-  if (!renderer) {
+  const renderer = Object.hasOwn(renderers, block.type) ? renderers[block.type] : undefined;
+  if (typeof renderer !== "function") {
     return createElement("pre", { key: path, className: "xyc-unavailable" },
       createElement("code", null, JSON.stringify(block, null, 2)));
   }
