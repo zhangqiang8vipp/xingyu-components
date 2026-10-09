@@ -46,13 +46,13 @@ const newTypes = [
   "line_chart", "pie_chart", "flowchart", "pros_cons", "glossary", "tag_list",
 ];
 
-test("all 30 registered types are discoverable and all 11 new examples use exact schemas", () => {
-  assert.equal(builtInDefinitions.length, 30);
+test("all 40 registered types are discoverable and all 11 new examples use exact schemas", () => {
+  assert.equal(builtInDefinitions.length, 40);
   const manifest = createCapabilityManifest();
   assert.deepEqual(JSON.parse(createMcpCapabilityText()), manifest);
-  assert.equal(manifest.components.length, 30);
-  assert.equal(new Set(manifest.components.map(({ type }) => type)).size, 30);
-  assert.deepEqual(manifest.components.slice(-11).map(({ type }) => type), newTypes);
+  assert.equal(manifest.components.length, 40);
+  assert.equal(new Set(manifest.components.map(({ type }) => type)).size, 40);
+  assert.deepEqual(manifest.components.slice(19, 30).map(({ type }) => type), newTypes);
   for (const block of valid) {
     const spec = manifest.components.find(({ type }) => type === block.type);
     assert.ok(spec && spec.version === 1 && spec.children === "none", block.type);
