@@ -15,7 +15,7 @@ const obsolete=[
 test("native Markdown and overlapping list/table components never appear in the 26-component capability registry",()=>{
   const registered=builtInDefinitions.map(x=>x.type);
   const manifest=createCapabilityManifest();
-  assert.equal(registered.length,24);
+  assert.equal(registered.length, 26);
   assert.deepEqual(manifest.components.map(x=>x.type),registered);
   for(const name of obsolete){
     assert.ok(!registered.includes(name), "Markdown is the host's responsibility: "+name);
