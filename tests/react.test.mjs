@@ -37,11 +37,11 @@ test("nested layout and local disclosure SSR without additional dependencies", (
 });
 
 test("installed custom validation without a renderer safely degrades to text", () => {
-  const quote = { type: "quote", version: 1, label: "Quote", description: "Text", category: "content",
+  const quote = { type: "custom_quote", version: 1, label: "Quote", description: "Text", category: "content",
     propsSchema: { type: "object", properties: { text: { type: "string", minLength: 1, maxLength: 80 } },
       required: ["text"], additionalProperties: false }, children: "none" };
   const registry = createRegistry([...builtInDefinitions, quote]);
-  const raw = source([{ type: "quote", version: 1, props: { text: "<b>not HTML</b>" } }]);
+  const raw = source([{ type: "custom_quote", version: 1, props: { text: "<b>not HTML</b>" } }]);
   const html = renderToStaticMarkup(createElement(DocumentRenderer, { source: raw, registry }));
   assert.match(html, /xyc-unavailable/);
   assert.ok(html.includes("&lt;b&gt;"));

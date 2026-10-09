@@ -95,11 +95,11 @@ test("untrusted URLs or event handlers cannot be smuggled into a callout", () =>
 
 test("registering trusted custom component extends discovery and parsing only when explicit", () => {
   const custom = {
-    type: "quote", version: 1, label: "Quote", description: "Plain quote", category: "content",
+    type: "custom_quote", version: 1, label: "Quote", description: "Plain quote", category: "content",
     propsSchema: { type: "object", required: ["text"], properties: { text: { type: "string", minLength: 1, maxLength: 500 } }, additionalProperties: false },
     children: "none",
   };
-  const raw = source([{ type: "quote", version: 1, props: { text: "Original words" } }]);
+  const raw = source([{ type: "custom_quote", version: 1, props: { text: "Original words" } }]);
   assert.equal(parseDocument(raw).ok, false);
   const registry = createRegistry([...builtInDefinitions, custom]);
   assert.equal(parseDocument(raw, registry).ok, true);
