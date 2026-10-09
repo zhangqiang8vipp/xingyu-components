@@ -8,7 +8,7 @@ A small, extensible **AI-native document UI toolkit** for React. Models choose w
 
 - A **versioned JSON v1 document contract** with strictly closed props schemas and composition through `stack` / `grid`.
 - Strict bounded **arrays, nested object fields and advertised table row/column consistency**, plus a **typed component registry** and a serializable **capability manifest** suitable for an MCP resource or tool response, independent of model vendor.
-- **30** reusable components: the previous 19 plus `accordion`, `checklist`, `status_list`, `code_block`, `sources`, `line_chart`, `pie_chart`, `flowchart`, `pros_cons`, `glossary` and `tag_list`. All 30 are available through the same protocol and capability manifest.
+- **40** reusable components: the previous 19 plus `accordion`, `checklist`, `status_list`, `code_block`, `sources`, `line_chart`, `pie_chart`, `flowchart`, `pros_cons`, `glossary` and `tag_list`; plus 10 additional information and data visualization patterns (`panel`, `hero`, `link_cards`, `tree_view`, `stacked_bar_chart`, `scatter_chart`, `heatmap`, `rating_group`, `agenda`, `kanban_board`). All 40 are available through the same protocol and capability manifest.
 - A safe React renderer, optional scoped CSS, original-source fallback for invalid/unknown content, and zero runtime AI/network/write actions.
 - Tests for strict bounds, closed schemas, HTTPS-only external sources, positive-sum charts, nesting, capability discovery, source-preserving fallback and safe React output.
 
@@ -25,7 +25,7 @@ This repository is currently a **development-only package** (`private: true`); n
 
 ## 可视化组件图鉴 (Gallery)
 
-This repository includes a **real-renderer component atlas** for all 30 registered components. It is generated from the same `DocumentRenderer` and `createCapabilityManifest()` as the library. Each example is validated first and rendered to static HTML, not hand-drawn as a mock. A separate same-origin iframe provides a **real 360px mobile viewport** and dark theme synchronization.
+This repository includes a **real-renderer component atlas** for all 40 registered components. It is generated from the same `DocumentRenderer` and `createCapabilityManifest()` as the library. Each example is validated first and rendered to static HTML, not hand-drawn as a mock. A separate same-origin iframe provides a **real 360px mobile viewport** and dark theme synchronization.
 
 ```bash
 npm install
@@ -77,7 +77,7 @@ The host decides where to store the source. Structured components do not replace
 
 ## New composition showcase
 
-See [`examples/showcase.json`](examples/showcase.json) for a copyable document demonstrating the expanded 30-component palette. This is a static example, not a production article or verified external data source.
+See [`examples/showcase.json`](examples/showcase.json) for a copyable document demonstrating the expanded 40-component palette. This is a static example, not a production article or verified external data source.
 
 ## Extension and safety contract
 
