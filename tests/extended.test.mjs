@@ -20,9 +20,9 @@ const valid = [
 const render = blocks => renderToStaticMarkup(createElement(DocumentRenderer, { source: doc(blocks) }));
 
 test("retained data primitives are registered in the authoritative manifest", () => {
-  assert.equal(builtInDefinitions.length, 24);
+  assert.equal(builtInDefinitions.length, 26);
   const manifest = createCapabilityManifest();
-  assert.equal(new Set(manifest.components.map(x => x.type)).size, 24);
+  assert.equal(new Set(manifest.components.map(x => x.type)).size, 26);
   assert.deepEqual(JSON.parse(createMcpCapabilityText()), manifest);
   for (const block of valid) {
     const definition = manifest.components.find(x => x.type === block.type);

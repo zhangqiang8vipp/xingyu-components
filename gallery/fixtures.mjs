@@ -11,12 +11,12 @@ export const gallerySpecimens = Object.freeze({
   }),
   metric: block("metric", {
     label: "通用组件数量",
-    value: "24",
+    value: "26",
     note: "来自当前版本的能力目录",
   }),
   stack: block("stack", { gap: "sm" }, [
-    block("metric", { label: "结构块", value: "24", note: "仅统计独立视觉组件" }),
-    block("badge", { label: "Markdown 优先 · 示例", tone: "info" }),
+    block("metric", { label: "结构块", value: "26", note: "仅统计独立视觉组件" }),
+    block("tip", { text: "Watch ACTIVE · 示例", tone: "success", variant: "pill" }),
     block("callout", { title: "组合，而非重复", body: "标题、段落与列表由宿主 Markdown 呈现。", tone: "success" }),
   ]),
   grid: block("grid", { columns: 2 }, [
@@ -103,7 +103,7 @@ export const gallerySpecimens = Object.freeze({
     tags: ["AI 原生", "文档设计", "TypeScript", "无障碍", "响应式"],
   }),
   panel: block("panel", { title: "内容分组 · 演示", summary: "组合已有组件，无需重做 Markdown。", tone: "soft" }, [
-    block("metric", { label: "可视组件", value: "24", note: "模拟展示数据" }),
+    block("metric", { label: "可视组件", value: "26", note: "模拟展示数据" }),
     block("callout", { title: "原生文本仍使用 Markdown", body: "分组面板只负责特殊视觉层次。", tone: "info" }),
   ]),
   hero: block("hero", { eyebrow: "XINGYU · EXAMPLE", title: "让表达更有层次", summary: "用简明的标题与引言建立阅读重点，复杂文字仍交给 Markdown。", align: "left" }),
@@ -134,6 +134,14 @@ export const gallerySpecimens = Object.freeze({
     { title: "进行中", cards: [{ title: "设计布局", detail: "模拟状态" }] },
     { title: "已完成", cards: [{ title: "协议定义" }] },
   ] }),
+  tip: block("tip", { text: "示例：检查通过", tone: "success", variant: "inline",
+    detail: "演示状态，不代表实时系统检查" }),
+  metric_transition: block("metric_transition", {
+    beforeLabel: "原组件数量", before: 40,
+    afterLabel: "精简后", after: 24,
+    differenceLabel: "移除重复组件",
+    note: "历史组件精简示例，当前总数请以能力清单为准",
+  }),
 });
 
 export const galleryCategoryLabels = Object.freeze({

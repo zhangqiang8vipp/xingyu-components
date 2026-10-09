@@ -12,7 +12,7 @@
           "type": "badge",
           "version": 1,
           "props": {
-            "label": "24 个独立组件",
+            "label": "26 个独立组件",
             "tone": "info"
           }
         },
@@ -21,7 +21,7 @@
           "version": 1,
           "props": {
             "label": "可视化能力",
-            "value": "24"
+            "value": "26"
           }
         }
       ]
@@ -47,7 +47,7 @@
           "version": 1,
           "props": {
             "label": "组件总数",
-            "value": "30",
+            "value": "26",
             "note": "当前示例版本"
           }
         },
@@ -236,7 +236,7 @@
           "version": 1,
           "props": {
             "label": "示例",
-            "value": "24"
+            "value": "26"
           }
         },
         {
@@ -393,6 +393,46 @@
             ]
           }
         ]
+      }
+    },
+    {
+      "type": "tip",
+      "version": 1,
+      "props": {
+        "text": "Watch ACTIVE · 示例状态",
+        "tone": "success",
+        "variant": "pill"
+      }
+    },
+    {
+      "type": "tip",
+      "version": 1,
+      "props": {
+        "text": "已完成模拟验收",
+        "tone": "success",
+        "variant": "inline"
+      }
+    },
+    {
+      "type": "tip",
+      "version": 1,
+      "props": {
+        "text": "注意：数字仅供演示",
+        "tone": "warning",
+        "variant": "note",
+        "detail": "所有指标都必须由作者或系统提供真实数值。"
+      }
+    },
+    {
+      "type": "metric_transition",
+      "version": 1,
+      "props": {
+        "beforeLabel": "精简前",
+        "before": 40,
+        "afterLabel": "精简后",
+        "after": 24,
+        "differenceLabel": "精简数量",
+        "note": "示例为历史组件整理数据"
       }
     }
   ]

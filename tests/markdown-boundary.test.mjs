@@ -12,7 +12,7 @@ const obsolete=[
   "tree_view","key_value","comparison","steps","flowchart","disclosure",
 ];
 
-test("native Markdown and overlapping list/table components never appear in the 24-component capability registry",()=>{
+test("native Markdown and overlapping list/table components never appear in the 26-component capability registry",()=>{
   const registered=builtInDefinitions.map(x=>x.type);
   const manifest=createCapabilityManifest();
   assert.equal(registered.length,24);
