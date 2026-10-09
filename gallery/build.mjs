@@ -159,7 +159,7 @@ function renderIndex(items) {
 async function build() {
   const manifest = createCapabilityManifest();
   const definitions = manifest.components;
-  if (definitions.length !== 19) throw new Error("Gallery expects the current 19 approved components");
+  if (definitions.length < 1) throw new Error("At least one approved component is needed for the gallery");
   const expected = new Set(definitions.map((entry) => entry.type));
   const actual = Object.keys(gallerySpecimens);
   if (actual.length !== expected.size || actual.some((type) => !expected.has(type)))

@@ -20,6 +20,8 @@ test("the copyable composition showcase follows the same v1 contract as MCP", ()
   const additions = [
     "heading", "quote", "badge", "bullet_list", "numbered_list", "key_value",
     "table", "progress", "timeline", "steps", "comparison", "bar_chart",
+    "accordion", "checklist", "status_list", "code_block", "sources", "line_chart",
+    "pie_chart", "flowchart", "pros_cons", "glossary", "tag_list",
   ];
   for (const name of additions) {
     assert.ok(discovered.has(name), "showcase missing " + name);
@@ -29,5 +31,8 @@ test("the copyable composition showcase follows the same v1 contract as MCP", ()
   assert.match(html, /xyc-grid/);
   assert.match(html, /xyc-chart/);
   assert.match(html, /<progress/);
+  assert.match(html, /xyc-advanced-pie/);
+  assert.match(html, /xyc-accordion/);
+  assert.match(html, /xyc-sources/);
   assert.ok(!html.includes("<script"));
 });

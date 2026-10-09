@@ -19,6 +19,24 @@ function hasOnlyKeys(input: Record<string, unknown>, allowed: readonly string[])
   return Object.keys(input).every((key) => allowed.includes(key));
 }
 
+/** No URL in authored content may execute a scheme or point to localhost/IP literals.
+ * URLs are inert data here; only user-initiated clicks in trusted renderers navigate.
+ */
+function safeHttpsUrl(value: unknown, maxLength: number): value is string {
+  if (typeof value !== "string" || value.length < 12 || value.length > maxLength
+      || value !== value.trim() || /[\\\s\u0000-\u001f\u007f]/.test(value)
+      || !/^https:\/\//i.test(value)) return false;
+  try {
+    const url = new URL(value);
+    const hostname = url.hostname.toLowerCase();
+    return url.protocol === "https:" && hostname.includes(".") && !url.username && !url.password
+      && !url.port && !/^(?:[0-9.]+|localhost)$/i.test(hostname)
+      && !hostname.endsWith(".local") && !hostname.endsWith(".internal");
+  } catch {
+    return false;
+  }
+}
+
 function validValue(value: unknown, schema: ValueSchema, depth = 0): boolean {
   if (depth > MAX_DEPTH) return false;
   if (schema.type === "string") {
@@ -33,9 +51,17 @@ function validValue(value: unknown, schema: ValueSchema, depth = 0): boolean {
       && value >= schema.minimum && value <= schema.maximum;
   }
   if (schema.type === "boolean") return typeof value === "boolean";
+  if (schema.type === "https-url") return safeHttpsUrl(value, schema.maxLength);
   if (schema.type === "array") {
-    return Array.isArray(value) && value.length >= schema.minItems && value.length <= schema.maxItems
-      && value.every((item) => validValue(item, schema.items, depth + 1));
+    if (!Array.isArray(value) || value.length < schema.minItems || value.length > schema.maxItems
+        || !value.every((item) => validValue(item, schema.items, depth + 1))) return false;
+    if (schema.positiveSumField) {
+      const field = schema.positiveSumField;
+      return value.some((item) => isPlainRecord(item)
+        && typeof item[field] === "number" && Number.isFinite(item[field])
+        && item[field] > 0);
+    }
+    return true;
   }
   if (schema.type !== "object" || !isPlainRecord(value) || schema.additionalProperties !== false) return false;
   if (schema.required.some((key) => !Object.hasOwn(value, key))) return false;

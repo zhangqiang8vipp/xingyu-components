@@ -1,3 +1,4 @@
+import { advancedRenderers } from "./advanced.js";
 import { extendedRenderers } from "./extended.js";
 import { createElement, Fragment } from "react";
 import type { ReactNode } from "react";
@@ -33,6 +34,7 @@ export const builtInRenderers: RendererMap = {
   ),
   divider: () => createElement("hr", { className: "xyc-divider", "aria-hidden": true }),
   ...extendedRenderers,
+  ...advancedRenderers,
 };
 
 export interface DocumentRendererProps {

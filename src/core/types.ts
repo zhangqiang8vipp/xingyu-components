@@ -1,9 +1,13 @@
-/** A small serializable schema subset; no eval, HTML, event handlers, URLs, or executable content. */
+/** A small serializable schema subset; no eval, HTML, event handlers or executable content. Strict HTTPS links are inert data until a reader clicks. */
 export type ValueSchema =
   | { readonly type: "string"; readonly minLength?: number; readonly maxLength: number; readonly enum?: readonly string[] }
   | { readonly type: "number" | "integer"; readonly minimum: number; readonly maximum: number }
   | { readonly type: "boolean" }
-  | { readonly type: "array"; readonly items: ValueSchema; readonly minItems: number; readonly maxItems: number }
+  | { readonly type: "https-url"; readonly maxLength: number }
+  | { readonly type: "array"; readonly items: ValueSchema; readonly minItems: number; readonly maxItems: number;
+      /** When present, at least one array object must have a positive finite numeric value at this field. */
+      readonly positiveSumField?: string;
+    }
   | { readonly type: "object"; readonly required: readonly string[]; readonly properties: Readonly<Record<string, ValueSchema>>; readonly additionalProperties: false;
       /** Optional, explicitly described relational invariant for table-like fields. */
       readonly arrayLengthsMatch?: readonly { readonly collection: string; readonly nestedField: string; readonly comparison: string }[];

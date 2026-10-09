@@ -14,7 +14,7 @@ export const gallerySpecimens = Object.freeze({
   }),
   metric: block("metric", {
     label: "通用组件数量",
-    value: "19",
+    value: "30",
     note: "来自当前版本的能力目录",
   }),
   stack: block("stack", { gap: "sm" }, [
@@ -106,6 +106,87 @@ export const gallerySpecimens = Object.freeze({
       { label: "数据表格", value: 31 },
       { label: "交互模块", value: 17 },
     ],
+  }),
+  accordion: block("accordion", {
+    title: "常见疑问 · 演示",
+    items: [
+      { question: "为什么使用组件？", answer: "当数据需要被比较、折叠或分组时，结构化呈现有助于理解。" },
+      { question: "普通文字怎么办？", answer: "保持自然的 Markdown 段落即可，不需要全部改写。" },
+    ],
+  }),
+  checklist: block("checklist", {
+    title: "交付前核对 · 演示状态",
+    items: [
+      { text: "组件有明确的数据协议", checked: true, note: "示例状态，不代表真实项目验收" },
+      { text: "完成真实设备检查", checked: false, note: "需要人工确认" },
+    ],
+  }),
+  status_list: block("status_list", {
+    title: "小型任务状态 · 演示",
+    items: [
+      { text: "整理源数据", status: "done" },
+      { text: "核对数据含义", status: "active", detail: "正在演示处理中状态" },
+      { text: "发布内容", status: "pending" },
+    ],
+  }),
+  code_block: block("code_block", {
+    language: "typescript",
+    caption: "代码仅作展示，不执行",
+    code: 'const message = "Hello, XINGYU!";\nconsole.log(message);',
+  }),
+  sources: block("sources", {
+    title: "资料链接 · 示例",
+    items: [
+      { label: "MDN：HTML details 元素", url: "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details",
+        note: "作者提供的演示 URL，图鉴不自动验证页面内容" },
+      { label: "W3C WAI 文档", url: "https://www.w3.org/WAI/",
+        note: "请自行核对外部站点" },
+    ],
+  }),
+  line_chart: block("line_chart", {
+    title: "每周示例趋势（模拟数据）",
+    unit: "次",
+    items: [
+      { label: "周一", value: 24 },
+      { label: "周二", value: 30 },
+      { label: "周三", value: 21 },
+      { label: "周四", value: 39 },
+      { label: "周五", value: 43 },
+    ],
+  }),
+  pie_chart: block("pie_chart", {
+    title: "内容类型占比（模拟数据）",
+    unit: "项",
+    items: [
+      { label: "文章", value: 52 },
+      { label: "图表", value: 28 },
+      { label: "卡片", value: 20 },
+    ],
+  }),
+  flowchart: block("flowchart", {
+    title: "内容发布流程 · 演示",
+    items: [
+      { title: "确定主题", detail: "整理真实资料" },
+      { title: "构建草稿", detail: "选择合适的组件表达" },
+      { title: "审核与发布", detail: "仅在获得明确授权后发布" },
+    ],
+  }),
+  pros_cons: block("pros_cons", {
+    title: "两种表达方式的取舍 · 示例",
+    pros: ["结构清晰，便于核对", "可复用并支持响应式布局"],
+    cons: ["需要准确填写数据", "复杂内容可能更适合普通段落"],
+  }),
+  glossary: block("glossary", {
+    title: "术语速查 · 演示",
+    items: [
+      { term: "文档协议", definition: "描述安全、可读、可渲染数据结构的规则。" },
+      { term: "能力清单", definition: "让 AI 知道组件支持的类型、字段和边界。" },
+      { term: "只读渲染", definition: "展示内容，不执行作者提供的脚本或写入请求。" },
+    ],
+  }),
+  tag_list: block("tag_list", {
+    label: "文章主题 · 演示标签",
+    tags: ["AI 原生", "文档设计", "TypeScript", "无障碍", "响应式"],
   }),
 });
 
