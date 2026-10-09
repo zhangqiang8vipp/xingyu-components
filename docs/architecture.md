@@ -26,9 +26,9 @@ type Document = {
 };
 ```
 
-Only `stack` and `grid` accept `children`. All other built-ins reject a `children` key, even when empty. Schema fields support bounded `array` values and nested `object` structures. A `table` schema advertises an explicit `arrayLengthsMatch` constraint: every row must have exactly as many cells as columns. Parsers require exact keys and validated field types; numbers must be finite, within explicit bounds. Input is bounded to 120,000 UTF-16 characters, 128 total blocks and depth 8; composition containers may hold at most 16 children.
+Only `stack` and `grid` accept `children`. All other built-ins reject a `children` key, even when empty. Schema fields support bounded `array` values and nested `object` structures. A `table` schema advertises `arrayLengthsMatch` (rows must match columns); a `pie_chart` schema advertises `positiveSumField` (at least one finite positive slice); a `sources` schema uses `https-url` to reject credentials, non-HTTPS schemes, whitespace, hostless/localhost/IP links and nonstandard ports. Parsers require exact keys and validated field types; numbers must be finite, within explicit bounds. Input is bounded to 120,000 UTF-16 characters, 128 total blocks and depth 8; composition containers may hold at most 16 children.
 
-Schema for every component is the **single source of truth** for both runtime input validation and the agent-facing capability manifest. Adding an unknown type cannot implicitly install a renderer.
+Schema for every component is the **single source of truth** for both runtime input validation and the agent-facing capability manifest. Adding an unknown type cannot implicitly install a renderer. Only explicitly author-approved HTTPS source links can navigate after user clicks; they are not fetched or verified by the renderer.
 
 ## Adding a trusted component
 
@@ -47,7 +47,7 @@ import { builtInDefinitions, createRegistry } from "@xingyu/components/core";
 import { DocumentRenderer } from "@xingyu/components/react";
 
 const quote = {
-  type: "quote", version: 1, label: "引用", category: "content",
+  type: "custom_quote", version: 1, label: "引用", category: "content",
   description: "A short plain-text quotation.",
   propsSchema: {
     type: "object",

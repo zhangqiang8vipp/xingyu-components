@@ -8,9 +8,9 @@ A small, extensible **AI-native document UI toolkit** for React. Models choose w
 
 - A **versioned JSON v1 document contract** with strictly closed props schemas and composition through `stack` / `grid`.
 - Strict bounded **arrays, nested object fields and advertised table row/column consistency**, plus a **typed component registry** and a serializable **capability manifest** suitable for an MCP resource or tool response, independent of model vendor.
-- 19 foundational and general components: the original seven plus `heading`, `quote`, `badge`, `bullet_list`, `numbered_list`, `key_value`, `table`, `progress`, `timeline`, `steps`, `comparison`, `bar_chart`.
+- **30** reusable components: the previous 19 plus `accordion`, `checklist`, `status_list`, `code_block`, `sources`, `line_chart`, `pie_chart`, `flowchart`, `pros_cons`, `glossary` and `tag_list`. All 30 are available through the same protocol and capability manifest.
 - A safe React renderer, optional scoped CSS, original-source fallback for invalid/unknown content, and zero runtime AI/network/write actions.
-- Tests for limits, unknown fields, bounded arrays, relational table constraints, nesting, capability discovery and HTML-safe React output.
+- Tests for strict bounds, closed schemas, HTTPS-only external sources, positive-sum charts, nesting, capability discovery, source-preserving fallback and safe React output.
 
 ## Start locally
 
@@ -25,7 +25,7 @@ This repository is currently a **development-only package** (`private: true`); n
 
 ## 可视化组件图鉴 (Gallery)
 
-This repository includes a **real-renderer component atlas** for all 19 registered components. It is generated from the same `DocumentRenderer` and `createCapabilityManifest()` as the library. Each example is validated first and rendered to static HTML, not hand-drawn as a mock. A separate same-origin iframe provides a **real 360px mobile viewport** and dark theme synchronization.
+This repository includes a **real-renderer component atlas** for all 30 registered components. It is generated from the same `DocumentRenderer` and `createCapabilityManifest()` as the library. Each example is validated first and rendered to static HTML, not hand-drawn as a mock. A separate same-origin iframe provides a **real 360px mobile viewport** and dark theme synchronization.
 
 ```bash
 npm install
@@ -36,7 +36,7 @@ npm run gallery:preview
 
 The atlas provides searchable, category-filterable examples, light/dark and desktop/phone views, copyable v1 JSON and a downloadable `capabilities.json`. It uses no external scripts, CDN, analytics, live user data or AI API calls. All included statistics are explicitly **示例数据**.
 
-**Online preview:** This public repository does not yet have GitHub Pages enabled. A GitHub Actions workflow builds the gallery and uploads a downloadable preview artifact. When the owner opens **Settings → Pages → Build and deployment → Source: GitHub Actions**, the workflow can publish the site at `https://zhangqiang8vipp.github.io/xingyu-components/` after a new `workflow_dispatch` run. Do not assume this URL is live until deployment has succeeded.
+**Online preview:** [XINGYU Components gallery](https://zhangqiang8vipp.github.io/xingyu-components/) is published using GitHub Pages. On relevant `main` changes, GitHub Actions runs the full suite and deploys the latest schema-valid gallery after successful checks. Confirm the run's deployment status before claiming a particular commit is live.
 
 More details: [docs/gallery.md](docs/gallery.md).
 
@@ -77,13 +77,13 @@ The host decides where to store the source. Structured components do not replace
 
 ## New composition showcase
 
-See [`examples/showcase.json`](examples/showcase.json) for a copyable document containing the 12 additional component types. This is a static example, not a production article or verified external data source.
+See [`examples/showcase.json`](examples/showcase.json) for a copyable document demonstrating the expanded 30-component palette. This is a static example, not a production article or verified external data source.
 
 ## Extension and safety contract
 
 `createRegistry` accepts explicitly installed, trusted component definitions. Add a render function for each new component in the host's renderer map. **Never** import arbitrary JavaScript, code, HTML or components named by an article; article data may only select already registered types.
 
-Unknown types, unexpected fields, oversized or deeply nested input fail closed and can be displayed as escaped original text. Built-in components render text through React escaping. No links, scripts, DOM injection, storage writes or background requests are triggered by document data.
+Unknown types, unexpected fields, oversized or deeply nested input fail closed and can be displayed as escaped original text. Built-in components render text through React escaping. Component data never runs scripts, injects HTML, writes storage or makes background requests. `sources` supports **strictly validated HTTPS links** which navigate only when a reader explicitly clicks; the library does not verify remote claims.
 
 Style tokens inherit the host's design system; no global CSS reset.
 

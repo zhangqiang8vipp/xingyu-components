@@ -2,9 +2,9 @@
 
 **Phase 0 — this initial scaffold:** a production-independent package boundary, trusted registry, render-only v1 contract, seven basic primitives, React renderer, MCP capability manifest, tests and component-only styles.
 
-**Phase 1 — general composition (current):** expand from seven to 19 generic content/layout/data primitives under one new protocol, with bounded arrays, data tables, comparisons, timelines, progress and dependency-free SVG charts. Add a copyable showcase and validation/security tests. No legacy adapters or site changes.
+**Phase 1 — general composition (done):** seven to 19 audited primitives under one `xingyu-document/v1` protocol, with responsive data tables, compare/timeline/progress, static SVG bars and real-renderer gallery. No legacy adapters or site changes.
 
-**Phase 2 — depth and quality:** move toward 20–30 audited primitives, prioritizing keyboard-accessible tabs, safe source citations, more chart types and flexible layout. Reuse reviewed OSS libraries where practical, with SSR/mobile/dark tests, composition samples and stable theme tokens.
+**Phase 2 — editorial depth (current):** 19 to 30 approved primitives, including native keyboard-friendly accordion, read-only checklists/status, escaped code, validated HTTPS citation sources, static line/pie charts with original data, flowchart, pros/cons, glossary and topics. Extend strict schema tests and automatically generated gallery previews. Browser-dependent tab hydration remains a future task, not a fake static preview.
 
 **Phase 3 — extensible ecosystem:** offer around 100+ **presentation patterns through composition**, not necessarily 100 unique components. Introduce optional framework adapters and model-agnostic capability discovery only when real consumers require them.
 
