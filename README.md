@@ -4,20 +4,26 @@ An experimental **AI-native visual component library** for React. Agents choose 
 
 > Status: private development package (`0.0.x`), not on npm and not integrated into XINGYU Web.
 
-## Markdown first: 24 distinct visual components
+## Markdown first: 26 distinct visual components
 
 Ordinary paragraphs, headings, blockquotes, ordered and unordered/nested lists, task lists, code fences, horizontal rules, links, reference lists and Markdown tables belong to the **host's existing Markdown renderer**. They are deliberately *not* reimplemented as JSON components.
 
-The 24 retained components provide visual expression beyond ordinary Markdown:
+The 26 retained components provide visual expression beyond ordinary Markdown:
 
 | Kind | Components |
 | --- | --- |
 | Layout (3) | `stack`, `grid`, `panel` |
-| Content / emphasis (6) | `callout`, `badge`, `hero`, `link_cards`, `glossary`, `tag_list` |
-| Data visualization (14) | `metric`, `progress`, `timeline`, `bar_chart`, `status_list`, `line_chart`, `pie_chart`, `pros_cons`, `stacked_bar_chart`, `scatter_chart`, `heatmap`, `rating_group`, `agenda`, `kanban_board` |
+| Content / emphasis (7) | `callout`, `badge`, `tip`, `hero`, `link_cards`, `glossary`, `tag_list` |
+| Data visualization (15) | `metric`, `metric_transition`, `progress`, `timeline`, `bar_chart`, `status_list`, `line_chart`, `pie_chart`, `pros_cons`, `stacked_bar_chart`, `scatter_chart`, `heatmap`, `rating_group`, `agenda`, `kanban_board` |
 | Local interaction (1) | `accordion` |
 
-The experimental 40-component branch was reduced by 16 Markdown-equivalent or redundant types before merge. See [Markdown boundary and removed types](docs/markdown-boundary.md).
+The experimental 40-component branch was first reduced to 24 by removing 16 Markdown-equivalent or redundant types. Two later components, `tip` and `metric_transition`, add distinct visual behavior rather than reproducing Markdown. See [Markdown boundary and removed types](docs/markdown-boundary.md).
+
+## Small visual patterns
+
+- `tip`: one schema with `variant: "pill" | "inline" | "note"`, author-supplied `tone`, short text and optional detail. The library does **not** verify the indicated status.
+- `metric_transition`: a compact comparison of two nonnegative integer values plus a **derived absolute difference**. The labels and numbers must be factual; no separate or potentially inconsistent `delta` property is accepted.
+- Both render as read-only document blocks; `tip` looks visually inline but does not rewrite or embed itself inside an existing Markdown paragraph.
 
 ## Implementation and trust boundaries
 

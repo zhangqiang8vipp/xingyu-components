@@ -27,3 +27,9 @@ The single-item `disclosure` is subsumed by the retained multi-item `accordion`.
 3. Only trusted code adds schema, renderer, scoped CSS, validated fixture and security/accessibility tests.
 4. Do not run authored code, auto-fetch remote content, introduce hidden document writes or add legacy adapters without a verified consumer.
 5. Once consumers rely on a published release, preserve its protocol or explicitly version migrations.
+
+## Distinct lightweight additions
+
+- `tip` provides a visual status pill, inline icon hint and small note presentation. This is more than a plain Markdown label or blockquote; the tone is **author-provided**, never validated as real-time truth.
+- `metric_transition` relates two numeric counts and computes their absolute difference. This is not a replacement Markdown table or a repeat of the single-value `metric` card.
+- Red rectangles in example screenshots are reviewer annotations, not component borders. Both additions preserve source validation and block-only JSON rendering.

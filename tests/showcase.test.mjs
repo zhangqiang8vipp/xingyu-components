@@ -30,5 +30,8 @@ test("the copyable composition showcase follows the same v1 contract as MCP", ()
   assert.match(html, /xyc-accordion/);
   assert.match(html, /xyc-pattern-kanban/);
   assert.match(html, /xyc-pattern-heatmap/);
+  assert.match(html, /xyc-micro-tip-pill/);
+  assert.match(html, /xyc-micro-tip-note/);
+  assert.match(html, /xyc-metric-transition/);
   assert.ok(!html.includes("<script"));
 });

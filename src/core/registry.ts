@@ -159,6 +159,8 @@ export function createCapabilityManifest(registry: ComponentRegistry = defaultRe
       "The agent chooses when a component is useful. Use regular Markdown for normal prose.",
       "Only use the advertised type/version and exact props schema; do not add unknown fields.",
       "Never invent metrics, sources, dates, task states, or user data.",
+      "Tip tones are author-supplied visual cues, not independently checked live status.",
+      "For metric_transition supply factual nonnegative integer before/after values; the difference is computed by the renderer.",
       "Components are read-only render data, not commands, HTML, code execution or network fetches.",
       "Keep persisted source and fall back to escaped original text on invalid/unknown components.",
     ],

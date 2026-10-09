@@ -21,7 +21,7 @@ const valid=[
 const types=["accordion","status_list","line_chart","pie_chart","pros_cons","glossary","tag_list"];
 
 test("remaining editorial and chart components follow one bounded v1 manifest",()=>{
-  assert.equal(builtInDefinitions.length,24);
+  assert.equal(builtInDefinitions.length, 26);
   const manifest=createCapabilityManifest();
   assert.deepEqual(JSON.parse(createMcpCapabilityText()),manifest);
   for(const block of valid){const spec=manifest.components.find(x=>x.type===block.type);

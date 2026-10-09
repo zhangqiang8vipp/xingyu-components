@@ -1,6 +1,7 @@
 import { advancedRenderers } from "./advanced.js";
 import { extendedRenderers } from "./extended.js";
 import { patternRenderers } from "./patterns.js";
+import { microRenderers } from "./micro.js";
 import { createElement, Fragment } from "react";
 import type { ReactNode } from "react";
 import { defaultRegistry, parseDocument } from "../core/index.js";
@@ -31,6 +32,7 @@ export const builtInRenderers: RendererMap = {
   ...extendedRenderers,
   ...advancedRenderers,
   ...patternRenderers,
+  ...microRenderers,
 };
 
 export interface DocumentRendererProps {

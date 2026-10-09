@@ -17,15 +17,15 @@ test("example composes hero, grid, metric and accordion", () => {
   if (result.ok) assert.equal(result.document.blocks.length, 3);
 });
 
-test("schema catalog is the only source for all 24 registered component types", () => {
+test("schema catalog is the only source for all 26 registered component types", () => {
   const names = builtInDefinitions.map((entry) => entry.type);
-  assert.deepEqual(names, ["callout","metric","stack","grid","badge","progress","timeline","bar_chart","accordion","status_list","line_chart","pie_chart","pros_cons","glossary","tag_list","panel","hero","link_cards","stacked_bar_chart","scatter_chart","heatmap","rating_group","agenda","kanban_board"]);
+  assert.deepEqual(names, ["callout","metric","stack","grid","badge","progress","timeline","bar_chart","accordion","status_list","line_chart","pie_chart","pros_cons","glossary","tag_list","panel","hero","link_cards","stacked_bar_chart","scatter_chart","heatmap","rating_group","agenda","kanban_board","tip","metric_transition"]);
   assert.equal(new Set(names).size, names.length);
   const manifest = createCapabilityManifest();
   assert.equal(manifest.protocol, "xingyu-document");
   assert.equal(manifest.version, 1);
   assert.equal(manifest.contentModel, "render-only");
-  assert.equal(manifest.components.length, 24);
+  assert.equal(manifest.components.length, 26);
   assert.deepEqual(manifest.components.map((v) => v.type), names);
   assert.deepEqual(JSON.parse(createMcpCapabilityText()), manifest);
 });
@@ -101,8 +101,8 @@ test("registering trusted custom component extends discovery and parsing only wh
   assert.equal(parseDocument(raw).ok, false);
   const registry = createRegistry([...builtInDefinitions, custom]);
   assert.equal(parseDocument(raw, registry).ok, true);
-  assert.equal(createCapabilityManifest(registry).components.length, 25);
+  assert.equal(createCapabilityManifest(registry).components.length, 27);
   assert.throws(() => registry.register(custom), /Duplicate/);
   assert.throws(() => registry.register({ ...custom, type: "__proto__" }), /Invalid/);
-  assert.equal(defaultRegistry.list().length, 24, "global registry must not mutate");
+  assert.equal(defaultRegistry.list().length, 26, "global registry must not mutate");
 });
