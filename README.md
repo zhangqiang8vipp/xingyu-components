@@ -21,7 +21,7 @@ The experimental 40-component branch was first reduced to 24 by removing 16 Mark
 
 ## Small visual patterns
 
-- `tip`: one schema with `variant: "pill" | "inline" | "note"`, author-supplied `tone`, short text and optional detail. The library does **not** verify the indicated status.
+- `tip`: one schema with `variant: "pill" | "inline" | "note"`, author-supplied `tone`, short text and optional detail. The gallery shows all 15 combinations of three layouts × five tones, with real renderer previews and copyable JSON. The library does **not** verify the indicated status.
 - `metric_transition`: a compact comparison of two nonnegative integer values plus a **derived absolute difference**. The labels and numbers must be factual; no separate or potentially inconsistent `delta` property is accepted.
 - Both render as read-only document blocks; `tip` looks visually inline but does not rewrite or embed itself inside an existing Markdown paragraph.
 

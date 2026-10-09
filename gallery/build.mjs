@@ -10,7 +10,7 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createCapabilityManifest, parseDocument } from "../dist/core/index.js";
 import { DocumentRenderer } from "../dist/react/index.js";
-import { gallerySpecimens, galleryCategoryLabels, galleryCategoryDescriptions } from "./fixtures.mjs";
+import { gallerySpecimens, galleryTipGroups, galleryCategoryLabels, galleryCategoryDescriptions } from "./fixtures.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const output = join(root, "gallery-dist");
@@ -44,6 +44,34 @@ function renderFrame(title, markup) {
     '<body><main class="frame-content">' + markup + "</main></body>",
     "</html>",
   ].join("\n");
+}
+
+
+/**
+ * The tip card is one component with 15 independently validated real-SSR
+ * specimens. Group labels live only in this trusted gallery, not document data.
+ */
+function renderTipShowcase(groups) {
+  const sections = groups.map(({ variant, title, description, examples }) => {
+    const content = examples.map((block) => {
+      const singleSource = createSource(block);
+      const parsed = parseDocument(singleSource);
+      if (!parsed.ok || parsed.document.blocks[0].type !== "tip"
+          || (block.props.variant ?? "inline") !== variant) {
+        throw new Error("Invalid tip gallery example for " + variant);
+      }
+      const rendered = renderToStaticMarkup(createElement(DocumentRenderer, { source: singleSource }));
+      return '<div class="tip-case"><span class="tip-case-tone">'
+        + escapeHtml(block.props.tone) + "</span>" + rendered + "</div>";
+    }).join("");
+    return '<section class="tip-group" aria-label="' + escapeHtml(title) + '">'
+      + '<header class="tip-group-heading"><strong>' + escapeHtml(title)
+      + '</strong><small>' + escapeHtml(description) + "</small></header>"
+      + '<div class="tip-group-cases">' + content + "</div></section>";
+  }).join("");
+  return '<div class="tip-showcase"><p class="tip-showcase-lead">'
+    + "同一个 tip 组件：3 种形态 × 5 种语义颜色，共 15 个真实渲染示例。以下均为演示状态，不代表实时检查结果。"
+    + '</p><div class="tip-showcase-grid">' + sections + "</div></div>";
 }
 
 function renderCard(item, index) {
@@ -172,11 +200,17 @@ async function build() {
     const { type, label, category, description } = definition;
     if (!/^[a-z][a-z0-9_-]*$/.test(type) || !galleryCategoryLabels[category])
       throw new Error("Invalid gallery type/category: " + type);
-    const source = createSource(gallerySpecimens[type]);
+    const samples = type === "tip"
+      ? galleryTipGroups.flatMap(({ examples }) => examples)
+      : [gallerySpecimens[type]];
+    const source = JSON.stringify({ version: 1, blocks: samples }, null, 2);
     const parsed = parseDocument(source);
-    if (!parsed.ok || parsed.document.blocks.length !== 1 || parsed.document.blocks[0].type !== type)
-      throw new Error("Invalid gallery fixture for registered type: " + type);
-    const markup = renderToStaticMarkup(createElement(DocumentRenderer, { source }));
+    if (!parsed.ok || parsed.document.blocks.length !== samples.length
+        || parsed.document.blocks.some((block) => block.type !== type))
+      throw new Error("Invalid gallery fixture(s) for registered type: " + type);
+    const markup = type === "tip"
+      ? renderTipShowcase(galleryTipGroups)
+      : renderToStaticMarkup(createElement(DocumentRenderer, { source }));
     if (!markup.includes("xyc-document")) throw new Error("Real React renderer missing: " + type);
     await writeFile(join(output, "preview", type + ".html"), renderFrame(label, markup));
     items.push({ type, label, category, description, source });

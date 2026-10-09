@@ -54,3 +54,23 @@ body {
   .xyc-document .xyc-metric { padding: 12px; }
   .xyc-document .xyc-quote { padding: 10px 14px; }
 }
+
+/* Gallery-only matrix: every item inside is still the shipped React tip renderer. */
+.tip-showcase { min-width: 0; }
+.tip-showcase-lead { margin: 0 0 14px; font-size: 11px; line-height: 1.7; color: var(--muted); }
+.tip-showcase-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 13px; align-items: start; }
+.tip-group { min-width: 0; padding: 12px; border-radius: 10px; background: var(--soft); border: 1px solid var(--line); }
+.tip-group-heading { display: flex; flex-direction: column; gap: 1px; margin-bottom: 12px; }
+.tip-group-heading strong { font-size: 12px; letter-spacing: .01em; }
+.tip-group-heading small { font-size: 10px; color: var(--muted); line-height: 1.5; }
+.tip-group-cases { display: grid; gap: 9px; }
+.tip-case { display: grid; gap: 4px; min-width: 0; padding: 8px; border-radius: 7px; background: var(--surface); border: 1px solid var(--line); }
+.tip-case-tone { font: 600 9px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing: .04em; color: var(--muted); }
+.tip-case .xyc-document { min-width: 0; line-height: 1.45; }
+.tip-case .xyc-document .xyc-micro-tip { margin: 0; }
+.tip-case .xyc-document .xyc-micro-tip-note { padding: 7px 8px; }
+.tip-case .xyc-document .xyc-micro-tip-content { gap: 1px 7px; }
+@media (max-width: 700px) {
+  .tip-showcase-grid { grid-template-columns: minmax(0,1fr); }
+  .tip-group { padding: 10px; }
+}

@@ -314,3 +314,11 @@ a { color: inherit; text-decoration: none; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: 0.01ms !important; }
 }
+
+/* Give the single tip card room to display its 15 actual examples. */
+.component-card[data-component="tip"] { grid-column: 1 / -1; }
+.component-card[data-component="tip"] .preview-frame { height: 570px; }
+:root[data-device="phone"] .component-card[data-component="tip"] .preview-frame { height: 700px; }
+@media (max-width: 480px) {
+  .component-card[data-component="tip"] .preview-frame { height: 650px; }
+}

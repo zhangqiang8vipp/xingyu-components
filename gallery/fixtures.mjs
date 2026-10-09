@@ -134,8 +134,8 @@ export const gallerySpecimens = Object.freeze({
     { title: "进行中", cards: [{ title: "设计布局", detail: "模拟状态" }] },
     { title: "已完成", cards: [{ title: "协议定义" }] },
   ] }),
-  tip: block("tip", { text: "示例：检查通过", tone: "success", variant: "inline",
-    detail: "演示状态，不代表实时系统检查" }),
+  tip: block("tip", { text: "已合并部署成功！ · 示例", tone: "success", variant: "inline",
+    detail: "仅为视觉演示，不代表实时构建结果" }),
   metric_transition: block("metric_transition", {
     beforeLabel: "原组件数量", before: 40,
     afterLabel: "精简后", after: 24,
@@ -143,6 +143,45 @@ export const gallerySpecimens = Object.freeze({
     note: "历史组件精简示例，当前总数请以能力清单为准",
   }),
 });
+
+
+/**
+ * A tip is still ONE registered component. The atlas deliberately shows the
+ * entire 3-layout × 5-tone matrix using real trusted tip blocks, not mock HTML.
+ * Every message here is demonstrative, never verified monitoring output.
+ */
+export const galleryTipGroups = Object.freeze([
+  {
+    variant: "pill", title: "胶囊 · Pill", description: "适合短状态和简洁标记",
+    examples: [
+      block("tip", { text: "等待排队", tone: "neutral", variant: "pill" }),
+      block("tip", { text: "SYNCING · 示例", tone: "info", variant: "pill" }),
+      block("tip", { text: "Watch ACTIVE · 示例", tone: "success", variant: "pill" }),
+      block("tip", { text: "仅预检", tone: "warning", variant: "pill" }),
+      block("tip", { text: "CHECK FAILED · 示例", tone: "danger", variant: "pill" }),
+    ],
+  },
+  {
+    variant: "inline", title: "行内感 · Inline", description: "适合放在段落之间的小结论",
+    examples: [
+      block("tip", { text: "暂无更新", tone: "neutral", variant: "inline" }),
+      block("tip", { text: "正在接收数据", tone: "info", variant: "inline", detail: "流程状态示例" }),
+      gallerySpecimens.tip,
+      block("tip", { text: "需人工复核", tone: "warning", variant: "inline", detail: "请核对来源" }),
+      block("tip", { text: "连接失败", tone: "danger", variant: "inline", detail: "失败状态示例" }),
+    ],
+  },
+  {
+    variant: "note", title: "轻说明 · Note", description: "适合较完整但仍克制的提醒",
+    examples: [
+      block("tip", { text: "阅读说明", tone: "neutral", variant: "note", detail: "示例状态都由文档作者提供。" }),
+      block("tip", { text: "演示数据", tone: "info", variant: "note", detail: "不代表真实用户记录或线上指标。" }),
+      block("tip", { text: "模拟验收完成", tone: "success", variant: "note", detail: "这是排版示例，不代表实际验收。" }),
+      block("tip", { text: "风险提醒", tone: "warning", variant: "note", detail: "正式发布前应复核输入与来源。" }),
+      block("tip", { text: "演示：任务中断", tone: "danger", variant: "note", detail: "失败原因请以真实日志为准。" }),
+    ],
+  },
+]);
 
 export const galleryCategoryLabels = Object.freeze({
   content: "内容排版",
