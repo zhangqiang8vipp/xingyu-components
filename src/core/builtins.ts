@@ -1,5 +1,6 @@
 import { extendedDefinitions } from "./extended.js";
 import { advancedDefinitions } from "./advanced.js";
+import { patternDefinitions } from "./patterns.js";
 import type { ComponentDefinition, ObjectSchema, ValueSchema } from "./types.js";
 
 const string = (maxLength: number, minLength = 1): ValueSchema =>
@@ -59,4 +60,5 @@ export const builtInDefinitions: readonly ComponentDefinition[] = [
   },
   ...extendedDefinitions,
   ...advancedDefinitions,
+  ...patternDefinitions,
 ];
