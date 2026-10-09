@@ -422,3 +422,81 @@
   .xyc-document .xyc-status-row { align-items: flex-start; }
   .xyc-document .xyc-flowchart li { padding: 9px 10px; }
 }
+
+
+/* Read-only information patterns. All rules are scoped to DocumentRenderer. */
+.xyc-document .xyc-pattern-panel,
+.xyc-document .xyc-pattern-hero,
+.xyc-document .xyc-pattern-tree,
+.xyc-document .xyc-pattern-links,
+.xyc-document .xyc-pattern-chart,
+.xyc-document .xyc-pattern-heatmap,
+.xyc-document .xyc-pattern-rating,
+.xyc-document .xyc-pattern-agenda,
+.xyc-document .xyc-pattern-kanban {
+  min-width: 0; margin: 14px 0; padding: 17px; border-radius: 12px;
+  border: 1px solid var(--xyc-line); background: var(--xyc-surface);
+}
+.xyc-document .xyc-pattern-panel h3,
+.xyc-document .xyc-pattern-links h3,
+.xyc-document .xyc-pattern-tree h3,
+.xyc-document .xyc-pattern-heatmap h3,
+.xyc-document .xyc-pattern-rating h3,
+.xyc-document .xyc-pattern-agenda h3,
+.xyc-document .xyc-pattern-kanban h3 { font-size: 1.05em; margin: 0 0 12px; }
+.xyc-document .xyc-pattern-panel > p { margin: 0 0 14px; color: var(--xyc-muted); }
+.xyc-document .xyc-pattern-panel-body { display: grid; gap: 12px; min-width: 0; }
+.xyc-document .xyc-pattern-soft { background: var(--xyc-soft); }
+.xyc-document .xyc-pattern-accent { border-top: 3px solid var(--xyc-accent); }
+.xyc-document .xyc-pattern-hero { padding: 30px 23px; background: var(--xyc-soft); }
+.xyc-document .xyc-pattern-hero span { font-size: .8em; font-weight: 750; letter-spacing: .12em; color: var(--xyc-accent); }
+.xyc-document .xyc-pattern-hero h2 { margin: 8px 0; font-size: clamp(1.5rem, 4vw, 2.1rem); }
+.xyc-document .xyc-pattern-hero p { line-height: 1.7; margin: 0; color: var(--xyc-muted); }
+.xyc-document .xyc-pattern-align-center { text-align: center; }
+.xyc-document .xyc-pattern-links ul, .xyc-document .xyc-pattern-legend,
+.xyc-document .xyc-pattern-rating ul, .xyc-document .xyc-pattern-kanban ul { list-style: none; padding: 0; margin: 0; }
+.xyc-document .xyc-pattern-links ul { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+.xyc-document .xyc-pattern-links li, .xyc-document .xyc-pattern-kanban li {
+  min-width: 0; border: 1px solid var(--xyc-line); padding: 12px; border-radius: 9px; background: var(--xyc-soft);
+}
+.xyc-document .xyc-pattern-links a { display: flex; justify-content: space-between; gap: 8px; color: var(--xyc-accent); overflow-wrap: anywhere; }
+.xyc-document .xyc-pattern-links small, .xyc-document .xyc-pattern-links p,
+.xyc-document .xyc-pattern-note { color: var(--xyc-muted); font-size: .83em; overflow-wrap: anywhere; }
+.xyc-document .xyc-pattern-tree > ul { margin: 0; padding-left: 20px; display: grid; gap: 12px; }
+.xyc-document .xyc-pattern-tree li { line-height: 1.7; overflow-wrap: anywhere; }
+.xyc-document .xyc-pattern-chart figcaption { font-weight: 700; margin-bottom: 12px; }
+.xyc-document .xyc-pattern-chart svg { width: 100%; display: block; color: var(--xyc-ink); fill: currentColor; }
+.xyc-document .xyc-pattern-chart-scroll { overflow-x: auto; }
+.xyc-document .xyc-pattern-chart-scroll svg { min-width: 520px; font-size: 12px; }
+.xyc-document .xyc-pattern-axis { stroke: var(--xyc-muted); stroke-width: 1; }
+.xyc-document .xyc-pattern-legend { display: grid; gap: 9px; margin: 12px 0; }
+.xyc-document .xyc-pattern-legend li { display: flex; align-items: center; gap: 9px; }
+.xyc-document .xyc-pattern-legend li span { width: 13px; height: 13px; border-radius: 3px; flex: none; }
+.xyc-document .xyc-pattern-legend strong { margin-left: auto; font-variant-numeric: tabular-nums; }
+.xyc-document .xyc-pattern-raw summary { cursor: pointer; margin: 12px 0; }
+.xyc-document .xyc-pattern-table-scroll { max-width: 100%; overflow-x: auto; }
+.xyc-document .xyc-pattern-table-scroll table { border-collapse: collapse; width: 100%; min-width: 340px; }
+.xyc-document .xyc-pattern-table-scroll caption { text-align: left; color: var(--xyc-muted); font-size: .85em; margin-bottom: 7px; }
+.xyc-document .xyc-pattern-table-scroll th, .xyc-document .xyc-pattern-table-scroll td { padding: 9px 11px; border: 1px solid var(--xyc-line); text-align: left; white-space: nowrap; }
+.xyc-document .xyc-pattern-heat { display: block; border-radius: 5px; padding: 7px; text-align: center; font-variant-numeric: tabular-nums; }
+.xyc-document .xyc-pattern-rating li { padding: 12px 0; border-bottom: 1px solid var(--xyc-line); }
+.xyc-document .xyc-pattern-rating li > div { display: flex; justify-content: space-between; gap: 12px; }
+.xyc-document .xyc-pattern-rating meter { display: block; width: 100%; height: 15px; margin: 7px 0; accent-color: var(--xyc-accent); }
+.xyc-document .xyc-pattern-rating p, .xyc-document .xyc-pattern-agenda p,
+.xyc-document .xyc-pattern-kanban p { margin: 6px 0 0; color: var(--xyc-muted); font-size: .88em; }
+.xyc-document .xyc-pattern-agenda ol { list-style: none; margin: 0; padding: 0; }
+.xyc-document .xyc-pattern-agenda li { display: grid; grid-template-columns: minmax(72px, 25%) 1fr; gap: 12px; padding: 12px 0; border-top: 1px solid var(--xyc-line); }
+.xyc-document .xyc-pattern-agenda time { font-weight: 700; font-variant-numeric: tabular-nums; color: var(--xyc-accent); }
+.xyc-document .xyc-pattern-kanban-columns { display: grid; grid-template-columns: repeat(auto-fit,minmax(170px,1fr)); gap: 12px; }
+.xyc-document .xyc-pattern-kanban-columns > section { min-width: 0; padding: 11px; background: var(--xyc-soft); border-radius: 9px; }
+.xyc-document .xyc-pattern-kanban h4 { margin: 0 0 10px; display: flex; justify-content: space-between; gap: 10px; }
+.xyc-document .xyc-pattern-kanban li { background: var(--xyc-surface); margin: 8px 0; overflow-wrap: anywhere; }
+.xyc-document .xyc-pattern-links a:focus-visible, .xyc-document .xyc-pattern-raw summary:focus-visible,
+.xyc-document .xyc-pattern-table-scroll:focus-visible, .xyc-document .xyc-pattern-chart-scroll:focus-visible {
+  outline: 2px solid var(--xyc-accent); outline-offset: 3px;
+}
+@media (max-width: 520px) {
+  .xyc-document .xyc-pattern-links ul { grid-template-columns: minmax(0,1fr); }
+  .xyc-document .xyc-pattern-hero { padding: 22px 16px; }
+  .xyc-document .xyc-pattern-kanban-columns { grid-template-columns: minmax(0,1fr); }
+}
