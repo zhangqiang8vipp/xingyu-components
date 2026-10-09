@@ -26,9 +26,13 @@ type Document = {
 };
 ```
 
-Only `stack` and `grid` accept `children`. All other built-ins reject a `children` key, even when empty. Schema fields support bounded `array` values and nested `object` structures. A `table` schema advertises `arrayLengthsMatch` (rows must match columns); a `pie_chart` schema advertises `positiveSumField` (at least one finite positive slice); a `sources` schema uses `https-url` to reject credentials, non-HTTPS schemes, whitespace, hostless/localhost/IP links and nonstandard ports. Parsers require exact keys and validated field types; numbers must be finite, within explicit bounds. Input is bounded to 120,000 UTF-16 characters, 128 total blocks and depth 8; composition containers may hold at most 16 children.
+Only `stack`, `grid` and `panel` accept `children`. All other built-ins reject a `children` key, even when empty. Schema fields support bounded `array` values and nested `object` structures. A `heatmap` schema advertises `arrayLengthsMatch` (row values must match column labels); a `pie_chart` schema advertises `positiveSumField` (at least one finite positive slice); a `link_cards` schema uses `https-url` to reject credentials, non-HTTPS schemes, whitespace, hostless/localhost/IP links and nonstandard ports. Parsers require exact keys and validated field types; numbers must be finite, within explicit bounds. Input is bounded to 120,000 UTF-16 characters, 128 total blocks and depth 8; composition containers may hold at most 16 children.
 
-Schema for every component is the **single source of truth** for both runtime input validation and the agent-facing capability manifest. Adding an unknown type cannot implicitly install a renderer. Only explicitly author-approved HTTPS source links can navigate after user clicks; they are not fetched or verified by the renderer.
+Schema for every component is the **single source of truth** for both runtime input validation and the agent-facing capability manifest. Adding an unknown type cannot implicitly install a renderer. Only explicitly author-approved HTTPS resource links can navigate after user clicks; they are not fetched or verified by the renderer.
+
+## Markdown boundary
+
+Hosts render Markdown prose. Do **not** register replacements for paragraphs, headings, blockquotes, lists, code, simple links, task lists or Markdown tables. See [the Markdown boundary](markdown-boundary.md).
 
 ## Adding a trusted component
 
@@ -37,7 +41,7 @@ Schema for every component is the **single source of truth** for both runtime in
 3. Supply a React function through `DocumentRenderer renderers={{ customType: (props) => ... }}`. Never eval/compile code from the document.
 4. Ensure its own CSS remains scoped under `.xyc-document`, works in narrow layouts, and inherits host colors.
 5. Test invalid keys, bounds, nesting, plain-text rendering, XSS fallback, manifest entry and accessibility.
-6. Keep prior `type`/version documents readable. A future incompatible protocol version needs an explicit parser upgrade, not silent reinterpretation.
+6. After a released integration has real consumers, preserve versioned documents; breaking changes require an explicit upgrade. These unused experimental types were pruned before release.
 
 Illustration (application-owned code):
 
