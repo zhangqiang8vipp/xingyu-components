@@ -23,6 +23,23 @@ npm run ci
 
 This repository is currently a **development-only package** (`private: true`); no npm publish or external service is performed.
 
+## 可视化组件图鉴 (Gallery)
+
+This repository includes a **real-renderer component atlas** for all 19 registered components. It is generated from the same `DocumentRenderer` and `createCapabilityManifest()` as the library. Each example is validated first and rendered to static HTML, not hand-drawn as a mock. A separate same-origin iframe provides a **real 360px mobile viewport** and dark theme synchronization.
+
+```bash
+npm install
+npm run gallery:build
+npm run gallery:preview
+# Open http://127.0.0.1:4173/
+```
+
+The atlas provides searchable, category-filterable examples, light/dark and desktop/phone views, copyable v1 JSON and a downloadable `capabilities.json`. It uses no external scripts, CDN, analytics, live user data or AI API calls. All included statistics are explicitly **示例数据**.
+
+**Online preview:** This public repository does not yet have GitHub Pages enabled. A GitHub Actions workflow builds the gallery and uploads a downloadable preview artifact. When the owner opens **Settings → Pages → Build and deployment → Source: GitHub Actions**, the workflow can publish the site at `https://zhangqiang8vipp.github.io/xingyu-components/` after a new `workflow_dispatch` run. Do not assume this URL is live until deployment has succeeded.
+
+More details: [docs/gallery.md](docs/gallery.md).
+
 ## Host application usage
 
 ```tsx
