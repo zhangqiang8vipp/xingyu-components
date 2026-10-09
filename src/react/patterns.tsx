@@ -100,7 +100,7 @@ export const patternRenderers: RendererMap = {
           {items.map((item, i) => {
             const x = 65 + 545 * (item.x - minX) / xRange;
             const y = 262 - 235 * (item.y - minY) / yRange;
-            return <circle key={i} cx={x} cy={y} r="6" fill={shade(i)}><title>{item.label}: {item.x}, {item.y}</title></circle>;
+            return <circle key={i} cx={x} cy={y} r="6" fill={shade(i)}><title>{`${item.label}: ${item.x}, ${item.y}`}</title></circle>;
           })}
         </svg>
       </div>
