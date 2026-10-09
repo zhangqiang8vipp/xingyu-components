@@ -33,12 +33,23 @@ function validValue(value: unknown, schema: ValueSchema, depth = 0): boolean {
       && value >= schema.minimum && value <= schema.maximum;
   }
   if (schema.type === "boolean") return typeof value === "boolean";
+  if (schema.type === "array") {
+    return Array.isArray(value) && value.length >= schema.minItems && value.length <= schema.maxItems
+      && value.every((item) => validValue(item, schema.items, depth + 1));
+  }
   if (schema.type !== "object" || !isPlainRecord(value) || schema.additionalProperties !== false) return false;
   if (schema.required.some((key) => !Object.hasOwn(value, key))) return false;
   if (!hasOnlyKeys(value, Object.keys(schema.properties))) return false;
-  return Object.entries(value).every(([key, item]) => {
+  if (!Object.entries(value).every(([key, item]) => {
     const propertySchema = schema.properties[key];
     return propertySchema !== undefined && validValue(item, propertySchema, depth + 1);
+  })) return false;
+  return (schema.arrayLengthsMatch ?? []).every(({ collection, nestedField, comparison }) => {
+    const rows = value[collection];
+    const headers = value[comparison];
+    return Array.isArray(rows) && Array.isArray(headers)
+      && rows.every((row) => isPlainRecord(row) && Array.isArray(row[nestedField])
+        && row[nestedField].length === headers.length);
   });
 }
 

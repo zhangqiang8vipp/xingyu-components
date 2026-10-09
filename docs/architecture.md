@@ -26,7 +26,7 @@ type Document = {
 };
 ```
 
-Only `stack` and `grid` currently accept `children`. All other built-ins reject a `children` key, even when empty. Parsers require exact keys and validated field types; numbers must be finite, within explicit bounds. Input is bounded to 120,000 UTF-16 characters, 128 total blocks and depth 8; composition containers may hold at most 16 children.
+Only `stack` and `grid` accept `children`. All other built-ins reject a `children` key, even when empty. Schema fields support bounded `array` values and nested `object` structures. A `table` schema advertises an explicit `arrayLengthsMatch` constraint: every row must have exactly as many cells as columns. Parsers require exact keys and validated field types; numbers must be finite, within explicit bounds. Input is bounded to 120,000 UTF-16 characters, 128 total blocks and depth 8; composition containers may hold at most 16 children.
 
 Schema for every component is the **single source of truth** for both runtime input validation and the agent-facing capability manifest. Adding an unknown type cannot implicitly install a renderer.
 
@@ -77,4 +77,4 @@ export function Reader({ source }: { source: string }) {
 
 ## Planned extraction / adoption from XINGYU Web
 
-The current website's **nine specialized `xingyu-block` components remain in the site**. Port them individually only after v1 protocol equivalence, including content fidelity, styles, private-space ACL boundaries, no dependency inflation, and fallback for old stored Markdown. Don't modify the public reader/editor as a prerequisite for developing this package.
+The existing website remains unchanged. **The library's sole maintained document format is `xingyu-document` v1.** Do not build adapters for unused historical formats without a real consumer. A future XINGYU Web integration should be a separate PR using the new protocol with complete ACL, Markdown/persistence and mobile acceptance tests.

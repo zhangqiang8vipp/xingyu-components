@@ -1,0 +1,222 @@
+{
+  "version": 1,
+  "blocks": [
+    {
+      "type": "heading",
+      "version": 1,
+      "props": {
+        "text": "XINGYU Components · 通用内容示例",
+        "level": 2
+      }
+    },
+    {
+      "type": "text",
+      "version": 1,
+      "props": {
+        "text": "以下均为演示数据，只展示组件组合方式；正常文章依然可以使用 Markdown。"
+      }
+    },
+    {
+      "type": "grid",
+      "version": 1,
+      "props": {
+        "columns": 3
+      },
+      "children": [
+        {
+          "type": "metric",
+          "version": 1,
+          "props": {
+            "label": "组件总数",
+            "value": "19",
+            "note": "当前示例版本"
+          }
+        },
+        {
+          "type": "badge",
+          "version": 1,
+          "props": {
+            "label": "示例数据",
+            "tone": "neutral"
+          }
+        },
+        {
+          "type": "progress",
+          "version": 1,
+          "props": {
+            "label": "演示进度",
+            "value": 72.5,
+            "note": "非真实进度，仅用于展示"
+          }
+        }
+      ]
+    },
+    {
+      "type": "quote",
+      "version": 1,
+      "props": {
+        "text": "好的展示方式应该让内容更容易理解，而不是制造视觉噪音。",
+        "attribution": "示例引文"
+      }
+    },
+    {
+      "type": "bullet_list",
+      "version": 1,
+      "props": {
+        "items": [
+          "文字优先",
+          "数据需要依据",
+          "组件仅负责展示"
+        ]
+      }
+    },
+    {
+      "type": "numbered_list",
+      "version": 1,
+      "props": {
+        "items": [
+          "选择组件",
+          "填写数据",
+          "安全渲染"
+        ]
+      }
+    },
+    {
+      "type": "key_value",
+      "version": 1,
+      "props": {
+        "title": "文档属性（演示）",
+        "items": [
+          {
+            "label": "协议",
+            "value": "xingyu-document v1"
+          },
+          {
+            "label": "呈现",
+            "value": "React SSR"
+          }
+        ]
+      }
+    },
+    {
+      "type": "table",
+      "version": 1,
+      "props": {
+        "title": "示例表格",
+        "columns": [
+          "分类",
+          "示例值",
+          "备注"
+        ],
+        "rows": [
+          {
+            "cells": [
+              "排版",
+              "8",
+              "示意"
+            ]
+          },
+          {
+            "cells": [
+              "数据",
+              "5",
+              "示意"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "type": "timeline",
+      "version": 1,
+      "props": {
+        "title": "示例时间线",
+        "items": [
+          {
+            "label": "阶段 A",
+            "title": "设计协议"
+          },
+          {
+            "label": "阶段 B",
+            "title": "建立展示模块",
+            "detail": "保留原始数据"
+          }
+        ]
+      }
+    },
+    {
+      "type": "steps",
+      "version": 1,
+      "props": {
+        "title": "示例步骤",
+        "items": [
+          {
+            "title": "运行检查",
+            "body": "在本地项目根目录执行测试",
+            "code": "npm run ci"
+          },
+          {
+            "title": "人工查看",
+            "body": "检查移动端和键盘操作"
+          }
+        ]
+      }
+    },
+    {
+      "type": "comparison",
+      "version": 1,
+      "props": {
+        "title": "布局方式示例",
+        "left": "纵向",
+        "right": "网格",
+        "rows": [
+          {
+            "dimension": "适合内容",
+            "left": "文章段落",
+            "right": "短指标"
+          },
+          {
+            "dimension": "移动端",
+            "left": "自然流动",
+            "right": "自动换行"
+          }
+        ]
+      }
+    },
+    {
+      "type": "bar_chart",
+      "version": 1,
+      "props": {
+        "title": "演示数据图表",
+        "unit": "项",
+        "items": [
+          {
+            "label": "A 类",
+            "value": 12
+          },
+          {
+            "label": "B 类",
+            "value": 8
+          },
+          {
+            "label": "C 类",
+            "value": 15
+          }
+        ]
+      }
+    },
+    {
+      "type": "divider",
+      "version": 1,
+      "props": {}
+    },
+    {
+      "type": "disclosure",
+      "version": 1,
+      "props": {
+        "summary": "这些数据真实吗？",
+        "body": "不是，都是示例。组件不会联网查询或验证演示数字。"
+      }
+    }
+  ]
+}

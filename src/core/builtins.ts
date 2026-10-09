@@ -1,3 +1,4 @@
+import { extendedDefinitions } from "./extended.js";
 import type { ComponentDefinition, ObjectSchema, ValueSchema } from "./types.js";
 
 const string = (maxLength: number, minLength = 1): ValueSchema =>
@@ -55,4 +56,5 @@ export const builtInDefinitions: readonly ComponentDefinition[] = [
     description: "A subtle thematic visual separator.",
     propsSchema: object({}, []), children: "none",
   },
+  ...extendedDefinitions,
 ];

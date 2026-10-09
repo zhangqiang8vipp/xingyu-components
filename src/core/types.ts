@@ -3,7 +3,11 @@ export type ValueSchema =
   | { readonly type: "string"; readonly minLength?: number; readonly maxLength: number; readonly enum?: readonly string[] }
   | { readonly type: "number" | "integer"; readonly minimum: number; readonly maximum: number }
   | { readonly type: "boolean" }
-  | { readonly type: "object"; readonly required: readonly string[]; readonly properties: Readonly<Record<string, ValueSchema>>; readonly additionalProperties: false };
+  | { readonly type: "array"; readonly items: ValueSchema; readonly minItems: number; readonly maxItems: number }
+  | { readonly type: "object"; readonly required: readonly string[]; readonly properties: Readonly<Record<string, ValueSchema>>; readonly additionalProperties: false;
+      /** Optional, explicitly described relational invariant for table-like fields. */
+      readonly arrayLengthsMatch?: readonly { readonly collection: string; readonly nestedField: string; readonly comparison: string }[];
+    };
 
 export type ObjectSchema = Extract<ValueSchema, { type: "object" }>;
 

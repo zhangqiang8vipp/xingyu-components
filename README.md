@@ -7,10 +7,10 @@ A small, extensible **AI-native document UI toolkit** for React. Models choose w
 ## What is included
 
 - A **versioned JSON v1 document contract** with strictly closed props schemas and composition through `stack` / `grid`.
-- A **typed component registry** and a serializable **capability manifest** suitable for an MCP resource or tool response, independent of model vendor.
-- Seven foundational primitives: `text`, `callout`, `metric`, `stack`, `grid`, `disclosure`, `divider`.
+- Strict bounded **arrays, nested object fields and advertised table row/column consistency**, plus a **typed component registry** and a serializable **capability manifest** suitable for an MCP resource or tool response, independent of model vendor.
+- 19 foundational and general components: the original seven plus `heading`, `quote`, `badge`, `bullet_list`, `numbered_list`, `key_value`, `table`, `progress`, `timeline`, `steps`, `comparison`, `bar_chart`.
 - A safe React renderer, optional scoped CSS, original-source fallback for invalid/unknown content, and zero runtime AI/network/write actions.
-- Tests for limits, unknown fields, nesting, component discovery and HTML-safe React output.
+- Tests for limits, unknown fields, bounded arrays, relational table constraints, nesting, capability discovery and HTML-safe React output.
 
 ## Start locally
 
@@ -56,7 +56,11 @@ For local development inside this repository, import the compiled `dist/` output
 }
 ```
 
-The host decides where to store the source. Markdown is still preferred for regular prose; this format can be stored in a fenced block where the host already supports that convention. No site database or Markdown parser changes are included here.
+The host decides where to store the source. Structured components do not replace Markdown prose; this format can be stored in a fenced block where the host already supports that convention. No site database or Markdown parser changes are included here.
+
+## New composition showcase
+
+See [`examples/showcase.json`](examples/showcase.json) for a copyable document containing the 12 additional component types. This is a static example, not a production article or verified external data source.
 
 ## Extension and safety contract
 
@@ -68,7 +72,7 @@ Style tokens inherit the host's design system; no global CSS reset.
 
 ## Relationship to XINGYU Web
 
-The existing website is the first *future* consumer. It continues to own Markdown persistence, Knowledge Space ACL, draft/publication/version contracts, Cloudflare configuration and its nine specialized blocks. Package adoption will be a **separate, reviewed PR**, with exact-schema compatibility and fallback tests.
+XINGYU Web may become a future consumer, but **no website or historical component migration is planned in this stage**. Only the new, unified `xingyu-document` v1 format is developed here. The website continues to own Markdown persistence, Knowledge Space ACL, draft/publication/version contracts and Cloudflare configuration. Any future adoption is a **separate, reviewed PR** with explicit end-to-end test coverage.
 
 ## Project stage
 

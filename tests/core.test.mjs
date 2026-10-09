@@ -19,13 +19,15 @@ test("example composes text, grid, metric and callout", () => {
 
 test("schema catalog is the only source for all seven primitive types", () => {
   const names = builtInDefinitions.map((entry) => entry.type);
-  assert.deepEqual(names, ["text", "callout", "metric", "stack", "grid", "disclosure", "divider"]);
+  assert.deepEqual(names, ["text", "callout", "metric", "stack", "grid", "disclosure", "divider",
+    "heading", "quote", "badge", "bullet_list", "numbered_list", "key_value", "table",
+    "progress", "timeline", "steps", "comparison", "bar_chart"]);
   assert.equal(new Set(names).size, names.length);
   const manifest = createCapabilityManifest();
   assert.equal(manifest.protocol, "xingyu-document");
   assert.equal(manifest.version, 1);
   assert.equal(manifest.contentModel, "render-only");
-  assert.equal(manifest.components.length, 7);
+  assert.equal(manifest.components.length, 19);
   assert.deepEqual(manifest.components.map((v) => v.type), names);
   assert.deepEqual(JSON.parse(createMcpCapabilityText()), manifest);
 });
@@ -101,8 +103,8 @@ test("registering trusted custom component extends discovery and parsing only wh
   assert.equal(parseDocument(raw).ok, false);
   const registry = createRegistry([...builtInDefinitions, custom]);
   assert.equal(parseDocument(raw, registry).ok, true);
-  assert.equal(createCapabilityManifest(registry).components.length, 8);
+  assert.equal(createCapabilityManifest(registry).components.length, 20);
   assert.throws(() => registry.register(custom), /Duplicate/);
   assert.throws(() => registry.register({ ...custom, type: "__proto__" }), /Invalid/);
-  assert.equal(defaultRegistry.list().length, 7, "global registry must not mutate");
+  assert.equal(defaultRegistry.list().length, 19, "global registry must not mutate");
 });
