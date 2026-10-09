@@ -14,7 +14,7 @@ export const gallerySpecimens = Object.freeze({
   }),
   metric: block("metric", {
     label: "通用组件数量",
-    value: "30",
+    value: "40",
     note: "来自当前版本的能力目录",
   }),
   stack: block("stack", { gap: "sm" }, [
@@ -188,6 +188,42 @@ export const gallerySpecimens = Object.freeze({
     label: "文章主题 · 演示标签",
     tags: ["AI 原生", "文档设计", "TypeScript", "无障碍", "响应式"],
   }),
+  panel: block("panel", { title: "内容分组 · 演示", summary: "组合已有组件，无需专门模板。", tone: "soft" }, [
+    block("metric", { label: "知识卡片", value: "12", note: "模拟数据" }),
+    block("text", { text: "容器只负责视觉分组，正文继续使用正常文本。" }),
+  ]),
+  hero: block("hero", { eyebrow: "XINGYU · EXAMPLE", title: "让表达更有层次", summary: "用简明的标题与引言建立阅读重点，复杂文字仍交给 Markdown。", align: "left" }),
+  link_cards: block("link_cards", { title: "参考资源 · 示例", items: [
+    { label: "MDN Web Docs", url: "https://developer.mozilla.org/", note: "浏览器技术文档，需自行核验" },
+    { label: "W3C WAI", url: "https://www.w3.org/WAI/", note: "无障碍设计资源" },
+  ] }),
+  tree_view: block("tree_view", { title: "内容结构 · 示例", groups: [
+    { label: "知识组织", children: ["文章", "标签", "参考资料"] },
+    { label: "视觉表达", children: ["表格", "图表", "卡片"] },
+  ] }),
+  stacked_bar_chart: block("stacked_bar_chart", { title: "内容结构占比 · 模拟数据", unit: "项", items: [
+    { label: "文章", value: 48 }, { label: "组件", value: 32 }, { label: "其他", value: 20 },
+  ] }),
+  scatter_chart: block("scatter_chart", { title: "时间与评分 · 模拟数据", xLabel: "阅读时间", yLabel: "理解评分", items: [
+    { label: "A", x: 2, y: 4 }, { label: "B", x: 4, y: 3 }, { label: "C", x: 6, y: 5 },
+  ] }),
+  heatmap: block("heatmap", { title: "学习热力矩阵 · 模拟数据", columns: ["星期一", "星期二", "星期三"], rows: [
+    { label: "阅读", values: [25, 75, 48] }, { label: "整理", values: [55, 100, 65] }, { label: "练习", values: [10, 32, 87] },
+  ] }),
+  rating_group: block("rating_group", { title: "主观维度评分 · 模拟数据", items: [
+    { label: "可读性", score: 4.5, note: "仅作视觉演示" },
+    { label: "灵活性", score: 4.0 }, { label: "信息密度", score: 3.5 },
+  ] }),
+  agenda: block("agenda", { title: "工作坊日程 · 演示", items: [
+    { when: "09:00", title: "主题介绍", detail: "了解基本目标" },
+    { when: "10:30", title: "分组讨论", detail: "整理表达建议" },
+    { when: "14:00", title: "示例展示" },
+  ] }),
+  kanban_board: block("kanban_board", { title: "项目任务 · 演示", columns: [
+    { title: "待开始", cards: [{ title: "确定主题" }, { title: "收集参考资料" }] },
+    { title: "进行中", cards: [{ title: "设计布局", detail: "模拟状态" }] },
+    { title: "已完成", cards: [{ title: "协议定义" }] },
+  ] }),
 });
 
 export const galleryCategoryLabels = Object.freeze({
