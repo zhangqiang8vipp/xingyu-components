@@ -1,11 +1,8 @@
 import type { RendererMap } from "./index.js";
 
 type AccordionItem = { question: string; answer: string };
-type CheckItem = { text: string; checked: boolean; note?: string };
 type StatusItem = { text: string; status: "done" | "active" | "pending" | "blocked"; detail?: string };
-type SourceItem = { label: string; url: string; note?: string };
 type ChartItem = { label: string; value: number };
-type FlowItem = { title: string; detail?: string };
 type GlossaryItem = { term: string; definition: string };
 
 const fmt = new Intl.NumberFormat("zh-CN", { maximumFractionDigits: 2 });
@@ -141,21 +138,6 @@ export const advancedRenderers: RendererMap = {
       ))}
     </section>
   ),
-  checklist: (props) => (
-    <section className="xyc-checklist" aria-label={typeof props.title === "string" ? props.title : "只读清单"}>
-      <SectionTitle title={props.title} />
-      <ul>{(props.items as CheckItem[]).map(({ text, checked, note }, i) => (
-        <li key={i}>
-          <span className={"xyc-check-mark" + (checked ? " xyc-check-done" : "")}
-            aria-hidden="true">{checked ? "✓" : "–"}</span>
-          <span className="xyc-check-body"><strong>{text}</strong>
-            <span className="xyc-check-state">{checked ? "已完成" : "未完成"} · 只读</span>
-            {note && <small>{note}</small>}
-          </span>
-        </li>
-      ))}</ul>
-    </section>
-  ),
   status_list: (props) => (
     <section className="xyc-status-list" aria-label={typeof props.title === "string" ? props.title : "状态清单"}>
       <SectionTitle title={props.title} />
@@ -170,30 +152,6 @@ export const advancedRenderers: RendererMap = {
       ))}</ul>
     </section>
   ),
-  code_block: (props) => (
-    <figure className="xyc-code-sample">
-      <figcaption>
-        <span>{String(props.language)}</span>
-        {typeof props.caption === "string" && <span>{props.caption}</span>}
-      </figcaption>
-      <pre><code>{String(props.code)}</code></pre>
-    </figure>
-  ),
-  sources: (props) => (
-    <section className="xyc-sources" aria-label={typeof props.title === "string" ? props.title : "参考来源"}>
-      <SectionTitle title={props.title} />
-      <p className="xyc-source-caution">作者提供的链接，内容未经自动核验；仅点击时访问。</p>
-      <ol>{(props.items as SourceItem[]).map(({ label, url, note }, i) => (
-        <li key={i}>
-          <a href={url} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer">
-            {label} <span aria-hidden="true">↗</span>
-          </a>
-          <small>{new URL(url).hostname}</small>
-          {note && <p>{note}</p>}
-        </li>
-      ))}</ol>
-    </section>
-  ),
   line_chart: (props) => <LineChart
     title={String(props.title)} items={props.items as ChartItem[]}
     {...(typeof props.unit === "string" ? { unit: props.unit } : {})}
@@ -202,17 +160,6 @@ export const advancedRenderers: RendererMap = {
     title={String(props.title)} items={props.items as ChartItem[]}
     {...(typeof props.unit === "string" ? { unit: props.unit } : {})}
   />,
-  flowchart: (props) => (
-    <section className="xyc-flowchart" aria-label={typeof props.title === "string" ? props.title : "流程路径"}>
-      <SectionTitle title={props.title} />
-      <ol>{(props.items as FlowItem[]).map(({ title, detail }, i) => (
-        <li key={i}>
-          <span className="xyc-flow-number" aria-hidden="true">{i + 1}</span>
-          <div><strong>{title}</strong>{detail && <p>{detail}</p>}</div>
-        </li>
-      ))}</ol>
-    </section>
-  ),
   pros_cons: (props) => (
     <section className="xyc-pros-cons" aria-label={typeof props.title === "string" ? props.title : "优缺点对照"}>
       <SectionTitle title={props.title} />

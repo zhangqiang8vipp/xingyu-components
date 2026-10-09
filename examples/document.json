@@ -2,10 +2,12 @@
   "version": 1,
   "blocks": [
     {
-      "type": "text",
+      "type": "hero",
       "version": 1,
       "props": {
-        "text": "AI chooses the format; the site remains in charge of safe display."
+        "eyebrow": "EXAMPLE",
+        "title": "XINGYU Components",
+        "summary": "The host owns Markdown prose; components render structured information only."
       }
     },
     {
@@ -36,11 +38,15 @@
       ]
     },
     {
-      "type": "disclosure",
+      "type": "accordion",
       "version": 1,
       "props": {
-        "summary": "Why an independent library?",
-        "body": "The blog keeps its own storage, permissions and article design. This package owns only safe document presentation."
+        "items": [
+          {
+            "question": "How is safety enforced?",
+            "answer": "All component input is validated against the published schema."
+          }
+        ]
       }
     }
   ]

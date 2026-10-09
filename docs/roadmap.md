@@ -1,13 +1,15 @@
-# Roadmap — capabilities, not widget count
+# Roadmap — unique capabilities, not widget count
 
-**Phase 0 — this initial scaffold:** a production-independent package boundary, trusted registry, render-only v1 contract, seven basic primitives, React renderer, MCP capability manifest, tests and component-only styles.
+**Phase 0 — foundation (done):** independent React package, typed registry, render-only v1 document contract, safe source fallback, MCP capability manifest and CI.
 
-**Phase 1 — general composition (done):** seven to 19 audited primitives under one `xingyu-document/v1` protocol, with responsive data tables, compare/timeline/progress, static SVG bars and real-renderer gallery. No legacy adapters or site changes.
+**Phase 1 — exploration (done):** expand the palette experimentally to 40 visual and content blocks to establish schema, gallery and visualization quality.
 
-**Phase 2 — editorial depth (current):** 19 to 30 approved primitives, including native keyboard-friendly accordion, read-only checklists/status, escaped code, validated HTTPS citation sources, static line/pie charts with original data, flowchart, pros/cons, glossary and topics. Extend strict schema tests and automatically generated gallery previews. Browser-dependent tab hydration remains a future task, not a fake static preview.
+**Phase 2 — Markdown-first simplification (done):** remove 16 components duplicating Markdown or existing primitives, resulting in **24** distinct, scoped components. No historical-protocol adapter or changes to XINGYU Web.
 
-**Phase 3 — extensible ecosystem:** offer around 100+ **presentation patterns through composition**, not necessarily 100 unique components. Introduce optional framework adapters and model-agnostic capability discovery only when real consumers require them.
+**Phase 3 — acceptance and consumers:** validate real-browser mobile, dark/light, focus and accessibility; confirm successful GitHub Pages deployment; then pilot an agent-facing consumer. Keep the host's Markdown renderer as the only prose path.
 
-**Before public npm release:** choose a LICENSE with the owner, add a committed npm lockfile and reproducible CI, conduct accessibility and dependency audits, provide a real gallery/demo, write semver and security policies, and verify a fresh XINGYU Web integration of this new format when actually needed.
+**Phase 4 — extensibility where justified:** add new presentation patterns by composing existing visual components. Only introduce new primitives when Markdown and composition cannot solve the use case.
 
-Constraints: no AI composer, no arbitrary executable content in documents, no secret exposure, no private ACL in a public UI package, no direct production deployment from component work.
+Before public npm release: select an explicit license, commit lockfile, reproducible dependency/a11y audits, semver/security policy and a verified consumer integration.
+
+Constraints: no AI composer, document-authored scripts, secret exposure, host ACL, Markdown parser duplication or direct deployment of XINGYU Web.

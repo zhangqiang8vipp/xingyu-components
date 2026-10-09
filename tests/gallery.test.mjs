@@ -10,11 +10,11 @@ import { gallerySpecimens } from "../gallery/fixtures.mjs";
 const file = (name) => readFileSync(new URL("../gallery-dist/" + name, import.meta.url), "utf8");
 const expectedTypes = builtInDefinitions.map((definition) => definition.type);
 
-test("gallery is generated from the exact 30 declared and validated component schemas", () => {
+test("gallery is generated from the exact 24 declared and validated component schemas", () => {
   const manifest = JSON.parse(file("capabilities.json"));
   const examples = JSON.parse(file("examples.json"));
   const frameFiles = readdirSync(new URL("../gallery-dist/preview/", import.meta.url)).sort();
-  assert.equal(expectedTypes.length, 30);
+  assert.equal(expectedTypes.length, 24);
   assert.deepEqual(manifest.components.map((entry) => entry.type), expectedTypes);
   assert.deepEqual(Object.keys(examples), expectedTypes);
   assert.deepEqual(Object.keys(gallerySpecimens), expectedTypes);
@@ -50,9 +50,9 @@ test("atlas navigation, category filters, search and phone/dark preview toggles 
   assert.match(index, /data-filter="layout"/);
   assert.match(index, /data-filter="data"/);
   assert.match(index, /data-filter="interaction"/);
-  assert.equal((index.match(/class="component-card"/g) ?? []).length, 30);
-  assert.equal((index.match(/sandbox="allow-same-origin"/g) ?? []).length, 30);
-  assert.equal((index.match(/class="preview-frame"/g) ?? []).length, 30);
+  assert.equal((index.match(/class="component-card"/g) ?? []).length, 24);
+  assert.equal((index.match(/sandbox="allow-same-origin"/g) ?? []).length, 24);
+  assert.equal((index.match(/class="preview-frame"/g) ?? []).length, 24);
   assert.match(index, /script-src &#39;self&#39;/);
   assert.ok(!index.includes("src=\"https:"));
   assert.ok(!index.includes("onload="));

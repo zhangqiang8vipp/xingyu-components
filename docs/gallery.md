@@ -14,19 +14,19 @@ npm run gallery:preview
 ```
 
 Features:
-- 30 documented components, **one real SSR preview per registered component**, sorted in registry order
+- 24 documented components, **one real SSR preview per registered component**, sorted in registry order
 - Category filtering, search, source JSON panels and copy buttons
 - Desktop view and 360px **real iframe** mobile view, so CSS media queries actually run against the iframe viewport
 - Light/dark theme control, propagated to all same-origin preview frames
 - Downloadable `capabilities.json` generated from the same strict input schema as parsing
 - A static zipped/downloadable Actions artifact even when the repository has not yet enabled Pages
-- Built without external fonts, CDN, third-party analytics, remote data fetches or site-specific backend dependencies; `sources` examples contain only inert links, and gallery iframes block navigation
+- Built without external fonts, CDN, third-party analytics, remote data fetches or site-specific backend dependencies; `link_cards` examples contain only author-supplied HTTPS links, and gallery iframes block navigation
 
 All numbers and examples in `gallery/fixtures.mjs` are explicitly illustrative. They are not verified user analytics.
 
 ## Public preview and future builds
 
-GitHub Pages has been enabled using GitHub Actions. The gallery was deployed successfully before the 30-component extension. Every later `main` change to component sources/gallery triggers a new build and deployment; check the newest workflow result before assuming the latest palette is live.
+GitHub Pages has been enabled using GitHub Actions. The gallery was deployed successfully before the 24-component extension. Every later `main` change to component sources/gallery triggers a new build and deployment; check the newest workflow result before assuming the latest palette is live.
 
 1. Open [repository Pages settings](https://github.com/zhangqiang8vipp/xingyu-components/settings/pages).
 2. Choose **Build and deployment → Source → GitHub Actions**.
@@ -47,7 +47,7 @@ Compiled component CSS is copied unchanged from `src/styles.css`. Gallery layout
 
 ## Acceptance checklist
 
-- `npm run ci` builds the site then checks all 30 schemas, SSR render fidelity, escaped JSON, theme/device controls, local asset paths, and the downloadable manifest.
+- `npm run ci` builds the site then checks all 24 schemas, SSR render fidelity, escaped JSON, theme/device controls, local asset paths, and the downloadable manifest.
 - Manually open a desktop width around 1280px and 360px iframe mode. Inspect the table/chart horizontal scroll, progress labels, focus states and disclosure controls.
 - Toggle light/dark while frames are loaded, then filter/search; keyboard-focus the search, code disclosure and copy button.
 - Real browser mobile/a11y visual smoke is separate from automated source tests and must not be claimed as fully complete until performed.

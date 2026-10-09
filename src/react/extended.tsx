@@ -1,27 +1,10 @@
-import { createElement } from "react";
-import type { BlockRenderer, RendererMap } from "./index.js";
+import type { RendererMap } from "./index.js";
 
-type ItemPair = { label: string; value: string };
 type TimePoint = { label: string; title: string; detail?: string };
-type Step = { title: string; body: string; code?: string };
-type TableRow = { cells: string[] };
-type CompareRow = { dimension: string; left: string; right: string };
 type ChartPoint = { label: string; value: number };
 
 const format = new Intl.NumberFormat("zh-CN", { maximumFractionDigits: 2 });
 const text = (value: unknown) => String(value);
-
-const bulletList: BlockRenderer = (props) => (
-  <ul className="xyc-list">
-    {(props.items as string[]).map((item, index) => <li key={index}>{item}</li>)}
-  </ul>
-);
-
-const numberedList: BlockRenderer = (props) => (
-  <ol className="xyc-list">
-    {(props.items as string[]).map((item, index) => <li key={index}>{item}</li>)}
-  </ol>
-);
 
 function renderBarChart(props: Readonly<Record<string, unknown>>) {
   const items = props.items as ChartPoint[];
@@ -73,48 +56,11 @@ function renderBarChart(props: Readonly<Record<string, unknown>>) {
 
 /** New core protocol renderers: static, read-only and fully data-validated upstream. */
 export const extendedRenderers: RendererMap = {
-  heading: (props) => createElement(
-    ("h" + text(props.level)) as "h2" | "h3" | "h4",
-    { className: "xyc-heading" }, text(props.text),
-  ),
-  quote: (props) => (
-    <figure className="xyc-quote">
-      <blockquote>{text(props.text)}</blockquote>
-      {typeof props.attribution === "string" && <figcaption>— {props.attribution}</figcaption>}
-    </figure>
-  ),
   badge: (props) => (
     <span className={"xyc-badge xyc-badge-" + text(props.tone)}>
       {text(props.label)}
     </span>
   ),
-  bullet_list: bulletList,
-  numbered_list: numberedList,
-  key_value: (props) => (
-    <section className="xyc-key-value" aria-label={typeof props.title === "string" ? props.title : "属性清单"}>
-      {typeof props.title === "string" && <strong className="xyc-section-title">{props.title}</strong>}
-      <dl>{(props.items as ItemPair[]).map(({ label, value }, index) => (
-        <div key={index}><dt>{label}</dt><dd>{value}</dd></div>
-      ))}</dl>
-    </section>
-  ),
-  table: (props) => {
-    const cols = props.columns as string[];
-    const rows = props.rows as TableRow[];
-    const label = typeof props.title === "string" ? props.title : "数据表格";
-    return (
-      <div className="xyc-table-scroll" role="region" tabIndex={0}
-        aria-label={label + "（可横向滚动）"}>
-        <table className="xyc-table">
-          <caption>{label}</caption>
-          <thead><tr>{cols.map((col, i) => <th scope="col" key={i}>{col}</th>)}</tr></thead>
-          <tbody>{rows.map((row, i) =>
-            <tr key={i}>{row.cells.map((cell, j) =>
-              j === 0 ? <th scope="row" key={j}>{cell}</th> : <td key={j}>{cell}</td>)}</tr>)}</tbody>
-        </table>
-      </div>
-    );
-  },
   progress: (props) => (
     <div className="xyc-progress">
       <div className="xyc-progress-title">
@@ -136,27 +82,6 @@ export const extendedRenderers: RendererMap = {
         </li>
       ))}</ol>
     </section>
-  ),
-  steps: (props) => (
-    <section className="xyc-steps" aria-label={typeof props.title === "string" ? props.title : "分步说明"}>
-      {typeof props.title === "string" && <strong className="xyc-section-title">{props.title}</strong>}
-      <ol>{(props.items as Step[]).map(({ title, body, code }, i) => (
-        <li key={i}><strong>{title}</strong><p>{body}</p>
-          {code && <pre><code>{code}</code></pre>}
-        </li>
-      ))}</ol>
-    </section>
-  ),
-  comparison: (props) => (
-    <div className="xyc-table-scroll" role="region" tabIndex={0} aria-label="横向滚动查看对比">
-      <table className="xyc-table">
-        <caption>{typeof props.title === "string" ? props.title : "双列对比"}</caption>
-        <thead><tr><th scope="col">维度</th><th scope="col">{text(props.left)}</th>
-          <th scope="col">{text(props.right)}</th></tr></thead>
-        <tbody>{(props.rows as CompareRow[]).map(({ dimension, left, right }, i) =>
-          <tr key={i}><th scope="row">{dimension}</th><td>{left}</td><td>{right}</td></tr>)}</tbody>
-      </table>
-    </div>
   ),
   bar_chart: (props) => renderBarChart(props),
 };

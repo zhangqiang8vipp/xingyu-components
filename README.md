@@ -1,98 +1,85 @@
 # XINGYU Components
 
-A small, extensible **AI-native document UI toolkit** for React. Models choose which supported components fit their content; applications validate, render and persist the source. **No AI composer, model gateway or agent-specific runtime.**
+An experimental **AI-native visual component library** for React. Agents choose from a validated, trusted capability manifest; the host owns regular Markdown and persistence. **This package neither parses nor replaces Markdown.**
 
-> Status: **experimental 0.0.x**, not published on npm, not integrated into XINGYU Web. The original XINGYU Web nine `xingyu-block` implementations remain untouched.
+> Status: private development package (`0.0.x`), not on npm and not integrated into XINGYU Web.
 
-## What is included
+## Markdown first: 24 distinct visual components
 
-- A **versioned JSON v1 document contract** with strictly closed props schemas and composition through `stack` / `grid`.
-- Strict bounded **arrays, nested object fields and advertised table row/column consistency**, plus a **typed component registry** and a serializable **capability manifest** suitable for an MCP resource or tool response, independent of model vendor.
-- **30** reusable components: the previous 19 plus `accordion`, `checklist`, `status_list`, `code_block`, `sources`, `line_chart`, `pie_chart`, `flowchart`, `pros_cons`, `glossary` and `tag_list`. All 30 are available through the same protocol and capability manifest.
-- A safe React renderer, optional scoped CSS, original-source fallback for invalid/unknown content, and zero runtime AI/network/write actions.
-- Tests for strict bounds, closed schemas, HTTPS-only external sources, positive-sum charts, nesting, capability discovery, source-preserving fallback and safe React output.
+Ordinary paragraphs, headings, blockquotes, ordered and unordered/nested lists, task lists, code fences, horizontal rules, links, reference lists and Markdown tables belong to the **host's existing Markdown renderer**. They are deliberately *not* reimplemented as JSON components.
 
-## Start locally
+The 24 retained components provide visual expression beyond ordinary Markdown:
+
+| Kind | Components |
+| --- | --- |
+| Layout (3) | `stack`, `grid`, `panel` |
+| Content / emphasis (6) | `callout`, `badge`, `hero`, `link_cards`, `glossary`, `tag_list` |
+| Data visualization (14) | `metric`, `progress`, `timeline`, `bar_chart`, `status_list`, `line_chart`, `pie_chart`, `pros_cons`, `stacked_bar_chart`, `scatter_chart`, `heatmap`, `rating_group`, `agenda`, `kanban_board` |
+| Local interaction (1) | `accordion` |
+
+The experimental 40-component branch was reduced by 16 Markdown-equivalent or redundant types before merge. See [Markdown boundary and removed types](docs/markdown-boundary.md).
+
+## Implementation and trust boundaries
+
+- A versioned `xingyu-document/v1` JSON contract with bounded nested schemas, a typed trusted registry, and composite children in `stack`, `grid` and `panel`.
+- A serializable MCP capability manifest produced from the **same schemas** as parsing; model/vendor independent.
+- React SSR output, scoped optional CSS, safely escaped values, and source-preserving fallback for invalid or unknown blocks.
+- Author-supplied HTTPS-only `link_cards` navigate only when a reader explicitly clicks; external claims are not verified.
+- Static visualizations with labels and original-data tables, never hidden network fetches or fabricated values.
+- No AI compositor, agent SDK, Markdown parser, arbitrary executable document code, remote HTML, storage or ACL.
+
+## Development and live gallery
 
 Requires Node.js 20+.
 
 ```bash
 npm install
 npm run ci
-```
-
-This repository is currently a **development-only package** (`private: true`); no npm publish or external service is performed.
-
-## 可视化组件图鉴 (Gallery)
-
-This repository includes a **real-renderer component atlas** for all 30 registered components. It is generated from the same `DocumentRenderer` and `createCapabilityManifest()` as the library. Each example is validated first and rendered to static HTML, not hand-drawn as a mock. A separate same-origin iframe provides a **real 360px mobile viewport** and dark theme synchronization.
-
-```bash
-npm install
-npm run gallery:build
 npm run gallery:preview
-# Open http://127.0.0.1:4173/
+# http://127.0.0.1:4173/
 ```
 
-The atlas provides searchable, category-filterable examples, light/dark and desktop/phone views, copyable v1 JSON and a downloadable `capabilities.json`. It uses no external scripts, CDN, analytics, live user data or AI API calls. All included statistics are explicitly **示例数据**.
+The [XINGYU Components gallery](https://zhangqiang8vipp.github.io/xingyu-components/) shows **real React-rendered previews** with search, category filtering, light/dark themes, 360px phone frame, copyable JSON and downloadable capability manifest. Examples contain clearly labeled demonstration data. A successful GitHub Pages Actions deployment is required before assuming the latest branch is live. See [gallery guide](docs/gallery.md).
 
-**Online preview:** [XINGYU Components gallery](https://zhangqiang8vipp.github.io/xingyu-components/) is published using GitHub Pages. On relevant `main` changes, GitHub Actions runs the full suite and deploys the latest schema-valid gallery after successful checks. Confirm the run's deployment status before claiming a particular commit is live.
-
-More details: [docs/gallery.md](docs/gallery.md).
-
-## Host application usage
+## Host integration
 
 ```tsx
 import { DocumentRenderer } from "@xingyu/components/react";
 import { createMcpCapabilityText } from "@xingyu/components/core";
 import "@xingyu/components/styles.css";
 
-const capabilityResource = createMcpCapabilityText();
-// Expose capabilityResource as read-only MCP resource/tool content.
-// GPT, Claude, Gemini, etc. decide which approved type to write.
+const capabilities = createMcpCapabilityText();
+// Expose as a read-only MCP resource/tool output to any supported agent.
+// Ordinary prose remains with the host's Markdown renderer.
 
-export function Example() {
+export function Example({ savedJsonSource }: { savedJsonSource: string }) {
   return <DocumentRenderer source={savedJsonSource} />;
 }
 ```
 
-For local development inside this repository, import the compiled `dist/` output after running `npm run build`. See [the example](examples/document.json) and [extension guide](docs/architecture.md).
-
-## Data format
+Example of a **visual-only** document:
 
 ```json
 {
   "version": 1,
   "blocks": [
-    { "type": "text", "version": 1, "props": { "text": "A short paragraph." } },
+    { "type": "hero", "version": 1, "props": { "title": "Overview", "summary": "Author-provided context." } },
     { "type": "grid", "version": 1, "props": { "columns": 2 }, "children": [
       { "type": "metric", "version": 1, "props": { "label": "Example", "value": "42" } },
-      { "type": "callout", "version": 1, "props": { "title": "Note", "body": "Factual data only.", "tone": "info" } }
+      { "type": "callout", "version": 1, "props": { "title": "Note", "body": "Factual source data only.", "tone": "info" } }
     ] }
   ]
 }
 ```
 
-The host decides where to store the source. Structured components do not replace Markdown prose; this format can be stored in a fenced block where the host already supports that convention. No site database or Markdown parser changes are included here.
+See [copyable showcase](examples/showcase.json) and [trusted extension guide](docs/architecture.md). Hosts may embed visual JSON alongside Markdown, but the host decides persistence and parsing conventions. This package neither defines a new Markdown syntax nor auto-converts prose to JSON.
 
-## New composition showcase
+## Future contributions
 
-See [`examples/showcase.json`](examples/showcase.json) for a copyable document demonstrating the expanded 30-component palette. This is a static example, not a production article or verified external data source.
+Only trusted host code may register new schemas and React renderers. Authored data cannot supply JSX/HTML, scripts, executable handlers, styles or network operations. Before adding any component, first check whether host Markdown or **composition of existing components** already does the job.
 
-## Extension and safety contract
+XINGYU Web is unchanged. It continues to own Markdown, ACL, knowledge-space permissions, versions, drafts and publication. Adoption requires a separate reviewed integration.
 
-`createRegistry` accepts explicitly installed, trusted component definitions. Add a render function for each new component in the host's renderer map. **Never** import arbitrary JavaScript, code, HTML or components named by an article; article data may only select already registered types.
+[Roadmap](docs/roadmap.md) · [Contributing](CONTRIBUTING.md)
 
-Unknown types, unexpected fields, oversized or deeply nested input fail closed and can be displayed as escaped original text. Built-in components render text through React escaping. Component data never runs scripts, injects HTML, writes storage or makes background requests. `sources` supports **strictly validated HTTPS links** which navigate only when a reader explicitly clicks; the library does not verify remote claims.
-
-Style tokens inherit the host's design system; no global CSS reset.
-
-## Relationship to XINGYU Web
-
-XINGYU Web may become a future consumer, but **no website or historical component migration is planned in this stage**. Only the new, unified `xingyu-document` v1 format is developed here. The website continues to own Markdown persistence, Knowledge Space ACL, draft/publication/version contracts and Cloudflare configuration. Any future adoption is a **separate, reviewed PR** with explicit end-to-end test coverage.
-
-## Project stage
-
-Roadmap: [docs/roadmap.md](docs/roadmap.md). Contributions: [CONTRIBUTING.md](CONTRIBUTING.md).
-
-**License:** Not selected yet. Public GitHub visibility alone does not grant an open-source license. Choose an explicit license before accepting external code contributions or publishing to npm.
+**License:** not yet selected. Public visibility alone is not a source license.

@@ -6,11 +6,11 @@ import { DocumentRenderer } from "../dist/react/index.js";
 import { builtInDefinitions, createRegistry } from "../dist/core/index.js";
 
 const source = (blocks) => JSON.stringify({ version: 1, blocks });
-const paragraph = (text) => ({ type: "text", version: 1, props: { text } });
+const sampleCallout = (text) => ({ type: "callout", version: 1, props: { title: "Example", body: text, tone: "info" } });
 
 test("React text content is HTML-escaped, not interpreted as raw markup", () => {
   const evil = '<img src=x onerror="alert(1)"><script>alert(1)</script>';
-  const html = renderToStaticMarkup(createElement(DocumentRenderer, { source: source([paragraph(evil)]) }));
+  const html = renderToStaticMarkup(createElement(DocumentRenderer, { source: source([sampleCallout(evil)]) }));
   assert.ok(html.includes("&lt;img"));
   assert.ok(html.includes("&lt;script&gt;"));
   assert.ok(!html.includes("<script>"));
@@ -25,10 +25,10 @@ test("unknown source falls back to escaped original and preserves text", () => {
   assert.ok(!html.includes("<iframe>"));
 });
 
-test("nested layout and local disclosure SSR without additional dependencies", () => {
+test("nested layout and local accordion SSR without additional dependencies", () => {
   const blocks = [{ type: "grid", version: 1, props: { columns: 2 }, children: [
-    paragraph("first"),
-    { type: "disclosure", version: 1, props: { summary: "Show", body: "Reveal" } },
+    sampleCallout("first"),
+    { type: "accordion", version: 1, props: { items: [{ question: "Show", answer: "Reveal" }] } },
   ] }];
   const html = renderToStaticMarkup(createElement(DocumentRenderer, { source: source(blocks) }));
   assert.match(html, /xyc-columns-2/);

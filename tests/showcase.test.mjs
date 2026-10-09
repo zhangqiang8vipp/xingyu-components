@@ -17,12 +17,7 @@ test("the copyable composition showcase follows the same v1 contract as MCP", ()
     for (const child of block.children ?? []) visit(child);
   };
   for (const block of parsed.document.blocks) visit(block);
-  const additions = [
-    "heading", "quote", "badge", "bullet_list", "numbered_list", "key_value",
-    "table", "progress", "timeline", "steps", "comparison", "bar_chart",
-    "accordion", "checklist", "status_list", "code_block", "sources", "line_chart",
-    "pie_chart", "flowchart", "pros_cons", "glossary", "tag_list",
-  ];
+  const additions = createCapabilityManifest().components.map(({type}) => type);
   for (const name of additions) {
     assert.ok(discovered.has(name), "showcase missing " + name);
     assert.ok(createCapabilityManifest().components.some((entry) => entry.type === name));
@@ -33,6 +28,7 @@ test("the copyable composition showcase follows the same v1 contract as MCP", ()
   assert.match(html, /<progress/);
   assert.match(html, /xyc-advanced-pie/);
   assert.match(html, /xyc-accordion/);
-  assert.match(html, /xyc-sources/);
+  assert.match(html, /xyc-pattern-kanban/);
+  assert.match(html, /xyc-pattern-heatmap/);
   assert.ok(!html.includes("<script"));
 });
