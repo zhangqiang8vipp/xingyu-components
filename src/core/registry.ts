@@ -33,7 +33,7 @@ function validValue(value: unknown, schema: ValueSchema, depth = 0): boolean {
       && value >= schema.minimum && value <= schema.maximum;
   }
   if (schema.type === "boolean") return typeof value === "boolean";
-  if (!isPlainRecord(value) || schema.additionalProperties !== false) return false;
+  if (schema.type !== "object" || !isPlainRecord(value) || schema.additionalProperties !== false) return false;
   if (schema.required.some((key) => !Object.hasOwn(value, key))) return false;
   if (!hasOnlyKeys(value, Object.keys(schema.properties))) return false;
   return Object.entries(value).every(([key, item]) => {
