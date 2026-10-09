@@ -16,6 +16,7 @@ npm run gallery:preview
 Features:
 - 26 documented components, **one real SSR preview per registered component**, sorted in registry order
 - Category filtering, search, source JSON panels and copy buttons
+- The **one registered `tip` component** has 15 live React showcase examples: three visual variants (`pill`, `inline`, `note`) × five tones (`neutral`, `info`, `success`, `warning`, `danger`). It remains one component in `capabilities.json`, while the gallery's `tip` example JSON contains all 15 validated blocks. The gallery groups/layout labels are presentation-only.
 - Desktop view and 360px **real iframe** mobile view, so CSS media queries actually run against the iframe viewport
 - Light/dark theme control, propagated to all same-origin preview frames
 - Downloadable `capabilities.json` generated from the same strict input schema as parsing

@@ -5,7 +5,7 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { builtInDefinitions, createCapabilityManifest, parseDocument } from "../dist/core/index.js";
 import { DocumentRenderer } from "../dist/react/index.js";
-import { gallerySpecimens } from "../gallery/fixtures.mjs";
+import { gallerySpecimens, galleryTipGroups } from "../gallery/fixtures.mjs";
 
 const file = (name) => readFileSync(new URL("../gallery-dist/" + name, import.meta.url), "utf8");
 const expectedTypes = builtInDefinitions.map((definition) => definition.type);
@@ -23,13 +23,25 @@ test("gallery is generated from the exact 26 declared and validated component sc
 
   for (const type of expectedTypes) {
     const doc = examples[type];
-    assert.deepEqual(doc, { version: 1, blocks: [gallerySpecimens[type]] });
+    const samples = type === "tip"
+      ? galleryTipGroups.flatMap(group => group.examples)
+      : [gallerySpecimens[type]];
+    assert.deepEqual(doc, { version: 1, blocks: samples });
     const source = JSON.stringify(doc);
     const parsed = parseDocument(source);
     assert.equal(parsed.ok, true, type + " must pass the real schema");
-    const markup = renderToStaticMarkup(createElement(DocumentRenderer, { source }));
     const frame = file("preview/" + type + ".html");
-    assert.ok(frame.includes(markup), type + " must embed actual shipped React markup");
+    if (type === "tip") {
+      for (const sample of samples) {
+        const markup = renderToStaticMarkup(createElement(DocumentRenderer, {
+          source: JSON.stringify({ version: 1, blocks: [sample] }),
+        }));
+        assert.ok(frame.includes(markup), "tip variant must use shipped React renderer");
+      }
+    } else {
+      const markup = renderToStaticMarkup(createElement(DocumentRenderer, { source }));
+      assert.ok(frame.includes(markup), type + " must embed actual shipped React markup");
+    }
     assert.match(frame, /<meta name="viewport" content="width=device-width,initial-scale=1">/);
     assert.match(frame, /script-src &#39;none&#39;/, "render-only frame must disable scripts");
     assert.match(frame, /href="\.\.\/components\.css"/);
@@ -87,4 +99,39 @@ test("rendered JSON examples remain safely escaped in source panels", () => {
   }
   assert.match(index, /&quot;version&quot;: 1/);
   assert.ok(!index.includes("<script>alert"));
+});
+
+test("tip atlas showcases 3 variants and 5 tones without registering new component types", () => {
+  const variants = ["pill", "inline", "note"];
+  const tones = ["neutral", "info", "success", "warning", "danger"];
+  const examples = galleryTipGroups.flatMap(group => group.examples);
+  assert.equal(galleryTipGroups.length, 3);
+  assert.equal(examples.length, 15);
+  assert.deepEqual(galleryTipGroups.map(group => group.variant), variants);
+  for (const group of galleryTipGroups) {
+    assert.equal(group.examples.length, 5);
+    assert.deepEqual(group.examples.map(example => example.props.tone), tones);
+    for (const example of group.examples) {
+      assert.equal(example.type, "tip");
+      assert.equal(example.version, 1);
+      assert.equal(example.props.variant, group.variant);
+      assert.equal(parseDocument(JSON.stringify({ version: 1, blocks: [example] })).ok, true);
+    }
+  }
+  const page = file("index.html");
+  const preview = file("preview/tip.html");
+  const examplesJson = JSON.parse(file("examples.json"));
+  assert.equal(examplesJson.tip.blocks.length, 15);
+  assert.match(page, /id="component-tip"/);
+  assert.match(page, /<button type="button" class="copy-button" data-copy>/);
+  assert.match(preview, /tip-showcase-grid/);
+  assert.match(preview, /tip-showcase-lead/);
+  assert.match(preview, /Watch ACTIVE/);
+  assert.match(preview, /已合并部署成功/);
+  assert.match(preview, /风险提醒/);
+  assert.equal((preview.match(/class="tip-case"/g) ?? []).length, 15);
+  assert.equal((preview.match(/class="tip-group" /g) ?? []).length, 3);
+  assert.ok(!preview.includes("<script"));
+  assert.match(file("gallery.css"), /data-component="tip"/);
+  assert.match(file("frame.css"), /@media \(max-width: 700px\)/);
 });
