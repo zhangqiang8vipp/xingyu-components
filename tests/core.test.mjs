@@ -29,7 +29,7 @@ test("schema catalog is the only source for all seven primitive types", () => {
   assert.equal(manifest.protocol, "xingyu-document");
   assert.equal(manifest.version, 1);
   assert.equal(manifest.contentModel, "render-only");
-  assert.equal(manifest.components.length, 30);
+  assert.equal(manifest.components.length, 40);
   assert.deepEqual(manifest.components.map((v) => v.type), names);
   assert.deepEqual(JSON.parse(createMcpCapabilityText()), manifest);
 });
@@ -105,8 +105,8 @@ test("registering trusted custom component extends discovery and parsing only wh
   assert.equal(parseDocument(raw).ok, false);
   const registry = createRegistry([...builtInDefinitions, custom]);
   assert.equal(parseDocument(raw, registry).ok, true);
-  assert.equal(createCapabilityManifest(registry).components.length, 31);
+  assert.equal(createCapabilityManifest(registry).components.length, 41);
   assert.throws(() => registry.register(custom), /Duplicate/);
   assert.throws(() => registry.register({ ...custom, type: "__proto__" }), /Invalid/);
-  assert.equal(defaultRegistry.list().length, 30, "global registry must not mutate");
+  assert.equal(defaultRegistry.list().length, 40, "global registry must not mutate");
 });
