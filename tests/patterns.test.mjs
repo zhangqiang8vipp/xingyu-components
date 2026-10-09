@@ -17,7 +17,7 @@ test("24 components expose nine new patterns through the exact same capability m
   assert.equal(builtInDefinitions.length, 24);
   const capabilities = createCapabilityManifest().components;
   assert.deepEqual(capabilities.slice(-9).map((item) => item.type), types);
-  assert.equal(new Set(capabilities.map((item) => item.type)).size, 40);
+  assert.equal(new Set(capabilities.map((item) => item.type)).size, 24);
   for (const type of types) {
     assert.ok(gallerySpecimens[type], "missing gallery specimen for " + type);
     assert.equal(valid(gallerySpecimens[type]), true, "invalid specimen for " + type);
