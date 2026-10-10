@@ -2,7 +2,6 @@ import {test} from "node:test";
 import assert from "node:assert/strict";
 import {MessageProcessor} from "@a2ui/web_core/v0_9";
 import {basicCatalog} from "@a2ui/web_core/v0_9/basic_catalog";
-import {A2uiSurface} from "@a2ui/react/v0_9";
 import {assertReadOnlyPilot, PILOT_SURFACE, PILOT_VERSION} from "../src/guard.ts";
 import {buildPilotMessages, pilotScenarios} from "../src/presets.ts";
 
@@ -10,9 +9,8 @@ const catalogId = basicCatalog.id;
 const clone = value => structuredClone(value);
 const messages = () => buildPilotMessages("status", catalogId);
 
-test("official A2UI packages export the v0_9 protocol processor, basic catalog and React surface", () => {
+test("official A2UI core exports the v0_9 protocol processor and basic catalog; React is browser-only", () => {
   assert.equal(typeof MessageProcessor, "function");
-  assert.equal(typeof A2uiSurface, "function");
   assert.equal(typeof catalogId, "string");
   assert.ok(catalogId.includes("a2ui"));
 });
