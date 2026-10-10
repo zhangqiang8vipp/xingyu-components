@@ -25,6 +25,15 @@ The experimental 40-component branch was first reduced to 24 by removing 16 Mark
 - `metric_transition`: a compact comparison of two nonnegative integer values plus a **derived absolute difference**. The labels and numbers must be factual; no separate or potentially inconsistent `delta` property is accepted.
 - Both render as read-only document blocks; `tip` looks visually inline but does not rewrite or embed itself inside an existing Markdown paragraph.
 
+## A2UI-first architecture validation
+
+We are **evaluating** the official A2UI specification and its upstream `@a2ui/react` renderer, rather than adding a new XINGYU component type for every presentation effect.
+
+- The independent [A2UI React pilot](experiments/a2ui/README.md) uses `Row`, `Column`, `Card`, `Icon` and `Text` to compose status, metrics and notice examples.
+- The [26-component consolidation matrix](docs/a2ui/decision.md) distinguishes generic compositions from features requiring trusted visual extensions.
+- **Do not confuse the pilot with production adoption.** A2UI is not yet an exported API, the library still supports `xingyu-document/v1`, and neither XINGYU Web nor Typora is changed.
+- The basic A2UI catalog does **not** include a universal `Badge` or `Chart` primitive; additional visual fidelity requires theme/presets or a trusted extension.
+
 ## Implementation and trust boundaries
 
 - A versioned `xingyu-document/v1` JSON contract with bounded nested schemas, a typed trusted registry, and composite children in `stack`, `grid` and `panel`.

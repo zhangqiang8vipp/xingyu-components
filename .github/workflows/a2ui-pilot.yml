@@ -1,0 +1,31 @@
+name: A2UI Official Renderer Pilot
+
+on:
+  push:
+    paths:
+      - "experiments/a2ui/**"
+      - "docs/a2ui/**"
+      - ".github/workflows/a2ui-pilot.yml"
+  pull_request:
+    paths:
+      - "experiments/a2ui/**"
+      - "docs/a2ui/**"
+      - ".github/workflows/a2ui-pilot.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  official-renderer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install pinned upstream A2UI React and web_core packages
+        run: npm install --prefix experiments/a2ui --no-audit --no-fund
+      - name: Typecheck, protocol gate, official renderer smoke, Vite build
+        run: npm run check --prefix experiments/a2ui
