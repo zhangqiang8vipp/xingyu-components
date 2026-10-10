@@ -3,7 +3,7 @@
 A **real official-renderer proof of concept**, not a refactor of `@xingyu/components`.
 
 - Protocol target: A2UI v0.9.1 production specification; test the package's actual compatibility in CI.
-- npm packages (pinned to 0.12.0): `@a2ui/react` + `@a2ui/web_core`.
+- npm packages (pinned to 0.13.0): `@a2ui/react` + `@a2ui/web_core`.
 - Runtime: official `MessageProcessor([basicCatalog])` -> official React `A2uiSurface`.
 - Scenarios: short status, numeric transition, and warning note. All composed from **the same five basic components**: `Text`, `Icon`, `Row`, `Column`, `Card`.
 - Security: experiment-only read-only envelope whitelist, explicit catalog ID, bounded adjacency graph, no actions, remote links, image/video, custom SVG, author HTML, markdown parsing, arbitrary component registration, or model/network calls.
@@ -32,6 +32,6 @@ The basic catalog is **not a generic visual design language**: it includes layou
 
 The upstream React quick start documents `v0.9` transport. This pilot tests `v0.9.1` explicitly; if the pinned official SDK rejects that identifier, the experiment must report the mismatch rather than silently invent a converter or claim acceptance.
 
-The official v0.12.0 React surface currently cannot be rendered using `renderToStaticMarkup` because its React store subscription omits `getServerSnapshot`. The pilot deliberately uses a client-side browser runtime; SSR support is a separate adoption gate. The upstream web_core catalog and React surface also currently disagree in TypeScript surface generics, so one documented cast stays at the experiment-only integration boundary.
+The official v0.12.0 React surface currently cannot be rendered using `renderToStaticMarkup` because its React store subscription omits `getServerSnapshot`. The pilot deliberately uses a client-side browser runtime; SSR support is a separate adoption gate. The upstream 0.12.0 web_core catalog and React surface disagree in TypeScript surface generics, so one documented cast stays at the experiment-only integration boundary.
 
 Do not expose this read-only gate as a full A2UI validator: it intentionally rejects most standard A2UI messages, including `deleteSurface`, actions, incremental update streams, images, inputs and function calls. Before real agent use, develop a standard-conformant trust boundary, catalog approval, lifecycle rules, SSR/client hydration and tenancy review. The experiment must not rewrite existing persisted JSON.
