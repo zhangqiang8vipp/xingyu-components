@@ -1,4 +1,4 @@
-import {useMemo, useState} from "react";
+import {useMemo, useState, type ComponentProps} from "react";
 import {MessageProcessor} from "@a2ui/web_core/v0_9";
 import {basicCatalog} from "@a2ui/web_core/v0_9/basic_catalog";
 import {A2uiSurface} from "@a2ui/react/v0_9";
@@ -37,7 +37,7 @@ export function App() {
       {result.error
         ? <pre role="alert" className="pilot-error">{result.error}</pre>
         : result.surface
-          ? <A2uiSurface key={scenario} surface={result.surface}/>
+          ? <A2uiSurface key={scenario} surface={result.surface as unknown as ComponentProps<typeof A2uiSurface>["surface"]}/>
           : <p>等待 A2UI Surface…</p>}
     </section>
     <p className="pilot-explainer">{pilotScenarios.find(s => s.id === scenario)?.description}</p>
