@@ -6,7 +6,9 @@
 
 **Phase 2 — Markdown-first simplification (done):** remove 16 components duplicating Markdown or existing primitives, resulting in **24** distinct, scoped components. No historical-protocol adapter or changes to XINGYU Web.
 
-**Phase 2.5 — small hints and metric transitions (in review):** add `tip` and `metric_transition` as non-Markdown visual patterns. Support pill/inline/note variants and automatically computed numeric difference, with responsive gallery fixtures and strict tests.
+**Phase 2.5 — small hints and metric transitions (done):** add `tip` and `metric_transition` as non-Markdown visual patterns. Support pill/inline/note variants and automatically computed numeric difference, with responsive gallery fixtures and strict tests.
+
+**Phase 3A — standard protocol validation (pilot, not adopted):** evaluate A2UI v0.9.1 using the official React renderer and basic catalog in an isolated subproject; classify all 26 types by standard composition vs trusted extension, without modifying existing document protocol. See [A2UI decision record](a2ui/decision.md).
 
 **Phase 3 — acceptance and consumers:** validate real-browser mobile, dark/light, focus and accessibility; confirm successful GitHub Pages deployment; then pilot an agent-facing consumer. Keep the host's Markdown renderer as the only prose path.
 

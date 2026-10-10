@@ -1,0 +1,49 @@
+name: A2UI Official Renderer Pilot
+
+on:
+  push:
+    paths:
+      - "experiments/a2ui/**"
+      - "docs/a2ui/**"
+      - ".github/workflows/a2ui-pilot.yml"
+  pull_request:
+    paths:
+      - "experiments/a2ui/**"
+      - "docs/a2ui/**"
+      - ".github/workflows/a2ui-pilot.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: a2ui-pilot-${{ github.event.pull_request.head.ref || github.ref_name }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  official-renderer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install pinned upstream A2UI React and web_core packages
+        run: npm install --prefix experiments/a2ui --no-audit --no-fund
+      - name: Typecheck, protocol gate, SDK processor smoke, Vite build
+        run: npm run check --prefix experiments/a2ui
+      - name: Install Chromium browser for true official renderer smoke
+        working-directory: experiments/a2ui
+        run: npx playwright install --with-deps chromium
+      - name: Browser render three standard-composed A2UI interfaces
+        working-directory: experiments/a2ui
+        run: npm run browser:smoke
+      - name: Upload experimental browser screenshot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: xingyu-a2ui-browser-smoke
+          path: experiments/a2ui/screenshots/
+          if-no-files-found: ignore
+          retention-days: 7

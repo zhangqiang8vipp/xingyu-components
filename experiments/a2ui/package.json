@@ -1,0 +1,29 @@
+{
+  "name": "@xingyu/a2ui-protocol-pilot",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Isolated proof of concept for the official A2UI React renderer",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "node --import tsx --test tests/*.test.mjs",
+    "build": "vite build",
+    "check": "npm run typecheck && npm test && npm run build",
+    "dev": "vite --host 127.0.0.1",
+    "browser:smoke": "node browser/smoke.mjs"
+  },
+  "dependencies": {
+    "@a2ui/react": "0.13.0",
+    "@a2ui/web_core": "0.13.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.1.0",
+    "@types/react-dom": "19.1.0",
+    "typescript": "5.8.3",
+    "tsx": "4.20.3",
+    "vite": "6.3.5",
+    "@playwright/test": "1.56.1"
+  }
+}
