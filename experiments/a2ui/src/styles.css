@@ -1,0 +1,25 @@
+/* Host-owned shell only: A2UI renderer controls its own primitive markup. */
+:root { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif; color: #25324c; background: #f5f7fb; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+button { font: inherit; }
+.pilot-shell { max-width: 880px; margin: 0 auto; padding: 44px 20px 64px; }
+.pilot-header h1 { font-size: clamp(24px,4vw,38px); margin: 10px 0 14px; letter-spacing: -.03em; }
+.pilot-header p { color: #5c6c83; line-height: 1.8; max-width: 660px; }
+.pilot-eyebrow { letter-spacing: .16em; font-size: 11px; font-weight: 760; color: #316cbe; }
+.pilot-switches { display: flex; flex-wrap: wrap; gap: 10px; margin: 26px 0 20px; }
+.pilot-switches button { cursor: pointer; border: 1px solid #c8d4e8; border-radius: 999px; background: white; color: inherit; padding: 9px 15px; }
+.pilot-switches button[aria-pressed="true"] { background: #2467bb; color: white; border-color: #2467bb; }
+.pilot-switches button:focus-visible { outline: 3px solid #2467bb; outline-offset: 3px; }
+.pilot-preview { min-height: 240px; border: 1px solid #d6dfec; background: #fff; border-radius: 15px; padding: clamp(14px,3vw,32px); overflow-wrap: anywhere; }
+.pilot-preview-label { font: 650 10px/1.5 ui-monospace,monospace; color: #7b8ea8; margin-bottom: 22px; letter-spacing: .08em; }
+.pilot-error { color: #b91c1c; white-space: pre-wrap; }
+.pilot-explainer { margin: 18px 0 4px; font-size: 14px; color: #405a7c; }
+.pilot-shell footer { border-top: 1px solid #d6dfec; margin-top: 34px; padding-top: 16px; font-size: 12px; line-height: 1.8; color: #728198; }
+@media(prefers-color-scheme:dark) {
+ :root { color: #e7eef9; background: #101823; }
+ .pilot-header p,.pilot-explainer { color: #b6c2d5; }
+ .pilot-preview,.pilot-switches button { background: #1a283a; border-color: #465771; color: #e7eef9; }
+ .pilot-switches button[aria-pressed="true"] { background: #3279d4; }
+ .pilot-preview-label,.pilot-shell footer { color: #acb9cc; }
+}
