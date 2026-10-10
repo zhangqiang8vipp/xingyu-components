@@ -65,9 +65,10 @@ This is an **evaluation matrix**, not evidence that all 26 have been migrated, a
 
 1. **Pilot**: Pin official packages in isolated experiment, run standard envelope through official processor + renderer, show at least three combinations.
 2. **Security**: Bound nodes/characters/depth, allowlist catalog, disallow arbitrary remote resources, actions and SVG, check malformed stream/cycles and unknown fields.
-3. **Real browser acceptance**: Test light/dark, narrow viewport, keyboard navigation, screen-reader semantics, data updates and CSS fidelity. CI build success is not visual acceptance.
+3. **Real browser acceptance**: Test narrow viewport and the official React rendering in Chromium, with screenshot artifact. Then separately inspect dark/light, keyboard navigation, screen-reader semantics, reactive data updates and CSS fidelity. CI build success alone is not full visual acceptance.
 4. **Choose version**: Verify production v0.9.1 compatibility in the actual published dependencies and pin them with a reproducible lockfile before consumer adoption.
-5. **Only after pilot passes**: Design stable host adapter and migration story; preserve current `xingyu-document/v1` sources until a consumer is tested. No silent persisted document conversion.
-6. **Adopt later**: XINGYU Web / Typora integration in separate reviewed PR with ACL and tenancy tests, and host-owned action handling.
+5. **SSR boundary**: Official v0.12.0 A2uiSurface cannot SSR via React renderToStaticMarkup without getServerSnapshot. Do not claim static/server rendering parity; use verified client React path until upstream fixes it or a reviewed host adapter exists.
+6. **Only after pilot passes**: Design stable host adapter and migration story; preserve current `xingyu-document/v1` sources until a consumer is tested. No silent persisted document conversion.
+7. **Adopt later**: XINGYU Web / Typora integration in separate reviewed PR with ACL and tenancy tests, and host-owned action handling.
 
 **Explicit non-goals**: new custom Markdown renderer, rewriting or deleting the 26 existing implementations, changing main site, auto-publishing to npm, claiming official renderer magically implements every design primitive.
