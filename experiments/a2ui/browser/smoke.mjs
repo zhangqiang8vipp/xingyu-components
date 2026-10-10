@@ -15,6 +15,20 @@ try {
   const errors = [];
   page.on("pageerror", error => errors.push(error.message));
   await page.goto("http://127.0.0.1:4173/", {waitUntil: "networkidle"});
+  // Collect an explicit failure artifact if the official renderer does not
+  // resolve data bindings or crashes. Do not treat protocol processing alone
+  // as evidence of visible UI.
+  try {
+    await page.getByText("Watch ACTIVE · 示例状态").waitFor({state: "visible", timeout: 12000});
+  } catch (error) {
+    console.error("A2UI BROWSER FAILURE:", error instanceof Error ? error.message : String(error));
+    console.error("UNCUGHT PAGE ERRORS:", JSON.stringify(errors));
+    console.error("PILOT PREVIEW TEXT:", (await page.locator(".pilot-preview").innerText()).slice(0, 3000));
+    console.error("PILOT PREVIEW HTML:", (await page.locator(".pilot-preview").innerHTML()).slice(0, 6000));
+    await mkdir("screenshots", {recursive: true});
+    await page.screenshot({path: "screenshots/a2ui-pilot-failure.png", fullPage: true});
+    throw error;
+  }
 
   assert.equal(await page.title(), "XINGYU | A2UI 官方渲染器验证");
   await page.getByText("Watch ACTIVE · 示例状态").waitFor({state: "visible", timeout: 15000});
