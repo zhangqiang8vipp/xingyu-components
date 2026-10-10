@@ -8,6 +8,7 @@ import {buildPilotMessages, pilotScenarios} from "../src/presets.ts";
 const catalogId = basicCatalog.id;
 const clone = value => structuredClone(value);
 const messages = () => buildPilotMessages("status", catalogId);
+const streamComponentCount = id => buildPilotMessages(id, catalogId)[1].updateComponents.components.length;
 
 test("official A2UI core exports the v0_9 protocol processor and basic catalog; React is browser-only", () => {
   assert.equal(typeof MessageProcessor, "function");
@@ -38,6 +39,14 @@ test("official web_core processes each actual sample stream into a surface", () 
     processor.processMessages(buildPilotMessages(id, catalogId));
     const surface = processor.model.surfacesMap.get(PILOT_SURFACE);
     assert.ok(surface, "official A2UI processor must create the surface for " + id);
+    assert.equal(surface.componentsModel.size, streamComponentCount(id),
+      "official processor must materialize every real component, not just an empty surface");
+    assert.equal(surface.componentsModel.has("root"), true, "root node must exist");
+    const stream = buildPilotMessages(id, catalogId);
+    const values = stream[2].updateDataModel.value;
+    for (const [key, value] of Object.entries(values)) {
+      assert.equal(surface.dataModel.get("/" + key), value, "official A2UI data binding: " + key);
+    }
     // The upstream A2uiSurface intentionally uses useSyncExternalStore without
     // getServerSnapshot in v0.12.0: Node SSR is not a supported smoke path.
     // Browser/smoke.mjs verifies *visible* React output in real Chromium.

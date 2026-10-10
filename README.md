@@ -29,7 +29,7 @@ The experimental 40-component branch was first reduced to 24 by removing 16 Mark
 
 We are **evaluating** the official A2UI specification and its upstream `@a2ui/react` renderer, rather than adding a new XINGYU component type for every presentation effect.
 
-- The independent [A2UI React pilot](experiments/a2ui/README.md) uses `Row`, `Column`, `Card`, `Icon` and `Text` to compose status, metrics and notice examples.
+- The independent [A2UI React pilot](experiments/a2ui/README.md) uses `Row`, `Column`, `Card`, `Icon` and `Text` to compose status, metrics and notice examples. Official `@a2ui/react` and `@a2ui/web_core` **v0.13.0** passed a Chromium real-render smoke with v0.9.1 messages and 360px viewport.
 - The [26-component consolidation matrix](docs/a2ui/decision.md) distinguishes generic compositions from features requiring trusted visual extensions.
 - **Do not confuse the pilot with production adoption.** A2UI is not yet an exported API, the library still supports `xingyu-document/v1`, and neither XINGYU Web nor Typora is changed.
 - The basic A2UI catalog does **not** include a universal `Badge` or `Chart` primitive; additional visual fidelity requires theme/presets or a trusted extension.

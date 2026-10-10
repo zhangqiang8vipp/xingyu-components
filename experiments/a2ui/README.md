@@ -24,7 +24,7 @@ npm run dev
 # open http://127.0.0.1:5173/
 ```
 
-The demo source is in `src/presets.ts`. The trusted boundary is `src/guard.ts`. The host-owned buttons switch among three fixed A2UI surfaces; **UI data itself cannot define an action**. The independent Chromium smoke exercises all three live official React surfaces, host-owned switching and the 360px viewport; a screenshot is uploaded as a GitHub Actions artifact. This is not a full manual accessibility audit.
+The verified upstream 0.13.0 SDK accepts our v0.9.1 read-only stream and the official React renderer draws all three scenarios in CI Chromium; the 360px screenshot is retained as an Actions artifact. The demo source is in `src/presets.ts`. The trusted boundary is `src/guard.ts`. The host-owned buttons switch among three fixed A2UI surfaces; **UI data itself cannot define an action**. The independent Chromium smoke exercises all three live official React surfaces, host-owned switching and the 360px viewport; a screenshot is uploaded as a GitHub Actions artifact. This is not a full manual accessibility audit.
 
 ## Evaluation boundaries
 
@@ -32,6 +32,6 @@ The basic catalog is **not a generic visual design language**: it includes layou
 
 The upstream React quick start documents `v0.9` transport. This pilot tests `v0.9.1` explicitly; if the pinned official SDK rejects that identifier, the experiment must report the mismatch rather than silently invent a converter or claim acceptance.
 
-The official v0.12.0 React surface currently cannot be rendered using `renderToStaticMarkup` because its React store subscription omits `getServerSnapshot`. The pilot deliberately uses a client-side browser runtime; SSR support is a separate adoption gate. The upstream 0.12.0 web_core catalog and React surface disagree in TypeScript surface generics, so one documented cast stays at the experiment-only integration boundary.
+Our initial test with the official v0.12.0 React surface could not be rendered using `renderToStaticMarkup` because its React store subscription omits `getServerSnapshot`. The pilot deliberately uses a client-side browser runtime; SSR support is a separate adoption gate. The upstream React/web_core surface generic disagreement was observed in v0.12.0; the experimental entrypoint retains one narrow cast. v0.13.0's React package requires browser globals (HTMLElement) at import time, so Node unit tests exercise the official web_core only, while Chromium exercises the actual React renderer.
 
 Do not expose this read-only gate as a full A2UI validator: it intentionally rejects most standard A2UI messages, including `deleteSurface`, actions, incremental update streams, images, inputs and function calls. Before real agent use, develop a standard-conformant trust boundary, catalog approval, lifecycle rules, SSR/client hydration and tenancy review. The experiment must not rewrite existing persisted JSON.

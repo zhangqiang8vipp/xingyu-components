@@ -1,6 +1,6 @@
 # Decision record: A2UI-first, no more bespoke visual widgets
 
-Status: **pilot / not adopted**. Owner: XINGYU Components. No production changes.
+Status: **official v0.9.1 message + v0.13.0 React Chromium smoke verified; pilot / not adopted**. Owner: XINGYU Components. No production changes.
 
 ## Why
 
@@ -63,11 +63,11 @@ This is an **evaluation matrix**, not evidence that all 26 have been migrated, a
 
 ## Migration gates
 
-1. **Pilot**: Pin official packages in isolated experiment, run standard envelope through official processor + renderer, show at least three combinations.
+1. **Pilot (automated proof passed)**: Pin official packages to 0.13.0 in isolated experiment, run v0.9.1 envelopes through official web_core processor and official React renderer. Three combinations appeared in Chromium; 360px screenshot artifact saved. This is proof of the basic read-only path, not a full compatibility/a11y certification.
 2. **Security**: Bound nodes/characters/depth, allowlist catalog, disallow arbitrary remote resources, actions and SVG, check malformed stream/cycles and unknown fields.
 3. **Real browser acceptance**: Test narrow viewport and the official React rendering in Chromium, with screenshot artifact. Then separately inspect dark/light, keyboard navigation, screen-reader semantics, reactive data updates and CSS fidelity. CI build success alone is not full visual acceptance.
 4. **Choose version**: Verify production v0.9.1 compatibility in the actual published dependencies and pin them with a reproducible lockfile before consumer adoption.
-5. **SSR boundary**: Official v0.12.0 A2uiSurface cannot SSR via React renderToStaticMarkup without getServerSnapshot. Do not claim static/server rendering parity; use verified client React path until upstream fixes it or a reviewed host adapter exists.
+5. **SSR boundary**: The initial official v0.12.0 A2uiSurface cannot SSR via React renderToStaticMarkup without getServerSnapshot; v0.13.0's renderer imports browser-only HTMLElement at module evaluation. Do not claim static/server rendering parity; use verified client React path until upstream fixes it or a reviewed host adapter exists.
 6. **Only after pilot passes**: Design stable host adapter and migration story; preserve current `xingyu-document/v1` sources until a consumer is tested. No silent persisted document conversion.
 7. **Adopt later**: XINGYU Web / Typora integration in separate reviewed PR with ACL and tenancy tests, and host-owned action handling.
 

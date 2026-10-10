@@ -13,6 +13,10 @@ on:
       - ".github/workflows/a2ui-pilot.yml"
   workflow_dispatch:
 
+concurrency:
+  group: a2ui-pilot-${{ github.event.pull_request.head.ref || github.ref_name }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
