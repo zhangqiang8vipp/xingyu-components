@@ -5,15 +5,17 @@
 import assert from "node:assert/strict";
 import {mkdir} from "node:fs/promises";
 import {chromium} from "@playwright/test";
-import {preview} from "vite";
+import {createServer} from "vite";
 
-const server = await preview({preview: {host: "127.0.0.1", port: 4173, strictPort: true}});
+const server = await createServer({server: {host: "127.0.0.1", port: 4173, strictPort: true}});
+await server.listen();
 let browser;
 try {
   browser = await chromium.launch({headless: true});
   const page = await browser.newPage({viewport: {width: 1024, height: 768}});
   const errors = [];
-  page.on("pageerror", error => errors.push(error.message));
+  page.on("pageerror", error => errors.push(error.stack ?? error.message));
+  page.on("console", message => { if (message.type() === "error") console.error("BROWSER CONSOLE:", message.text().slice(0, 2500)); });
   await page.goto("http://127.0.0.1:4173/", {waitUntil: "networkidle"});
   // Collect an explicit failure artifact if the official renderer does not
   // resolve data bindings or crashes. Do not treat protocol processing alone
@@ -23,8 +25,8 @@ try {
   } catch (error) {
     console.error("A2UI BROWSER FAILURE:", error instanceof Error ? error.message : String(error));
     console.error("UNCUGHT PAGE ERRORS:", JSON.stringify(errors));
-    console.error("PILOT PREVIEW TEXT:", (await page.locator(".pilot-preview").innerText()).slice(0, 3000));
-    console.error("PILOT PREVIEW HTML:", (await page.locator(".pilot-preview").innerHTML()).slice(0, 6000));
+    console.error("PILOT PREVIEW TEXT:", (await page.locator("body").innerText({timeout: 1000}).catch(() => "<body not available>")).slice(0, 3000));
+    console.error("PILOT PREVIEW HTML:", (await page.locator("body").innerHTML({timeout: 1000}).catch(() => "<body not available>")).slice(0, 6000));
     await mkdir("screenshots", {recursive: true});
     await page.screenshot({path: "screenshots/a2ui-pilot-failure.png", fullPage: true});
     throw error;
@@ -58,5 +60,5 @@ try {
   console.log("A2UI 360px Chromium visual smoke: passed");
 } finally {
   await browser?.close();
-  await new Promise(resolve => server.httpServer.close(resolve));
+  await server.close();
 }
