@@ -1,0 +1,28 @@
+name: Typora adapter
+on:
+  push:
+    paths: ['integrations/typora/**', 'src/**', '.github/workflows/typora-adapter.yml']
+  pull_request:
+    paths: ['integrations/typora/**', 'src/**', '.github/workflows/typora-adapter.yml']
+permissions:
+  contents: read
+jobs:
+  adapter:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-audit --no-fund && npm run build
+      - run: npm install --no-audit --no-fund --prefix integrations/typora
+      - run: npm run test --prefix integrations/typora
+      - run: npm run build --prefix integrations/typora
+      - uses: actions/upload-artifact@v4
+        with:
+          name: xingyu-typora-adapter
+          path: |
+            integrations/typora/dist/xingyu.js
+            integrations/typora/dist/THIRD_PARTY_NOTICES.txt
+          if-no-files-found: error
