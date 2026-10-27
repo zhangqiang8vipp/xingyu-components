@@ -1,0 +1,8 @@
+{
+  "name":"@xingyu/typora-adapter",
+  "version":"0.0.1",
+  "private":true,
+  "description":"Optional Typora code-fence adapter; not a Markdown parser",
+  "scripts":{"build":"node build.mjs","test":"node --test test/*.test.mjs"},
+  "devDependencies":{"esbuild":"^0.25.12","react":"19.1.0","react-dom":"19.1.0"}
+}
